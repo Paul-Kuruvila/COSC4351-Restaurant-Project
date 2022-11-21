@@ -1,17 +1,8 @@
 import './Navbar.css';
-import React, { useState } from 'react';
+import React from 'react';
 import logo from '../../images/logo.png';
 
 function Navbar() {
-  /*const [buttonText, setButtonText] = useState('Login');  This code is just sample code that was used for testing purposes
-
-  const changeButtonText = () => {
-    if(buttonText === 'Login')
-      setButtonText('Create an account');
-    else
-      setButtonText('Login');
-  };*/
-
   return (
     <div className='Navbar'>
       <div style={{display: 'flex', alignItems: 'center', cursor: 'help'}}>
