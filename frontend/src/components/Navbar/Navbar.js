@@ -10,7 +10,7 @@ function Navbar() {
         <h1>Seat Yourself!</h1>
       </div>
       <div className='Login'>
-        <p style={{textAlign: 'center'}}>Already have an account?<br/><a href="https://github.com/PaulKuruvila" rel='noopener noreferrer' target='_blank'>Click here.</a></p>
+        <p>Already have an account?<br/><a href="https://github.com/PaulKuruvila" rel='noopener noreferrer' target='_blank'>Click here.</a></p>
         <button/>
       </div>
     </div>
