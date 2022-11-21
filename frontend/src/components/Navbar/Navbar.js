@@ -5,9 +5,9 @@ import logo from '../../images/logo.png';
 function Navbar() {
   return (
     <div className='Navbar'>
-      <div style={{display: 'flex', alignItems: 'center', cursor: 'help'}}>
-        <img className='Logo' src={logo}/>
-        <h1 className='Title'>Seat Yourself!</h1>
+      <div className='Logo'>
+        <img src={logo}/>
+        <h1>Seat Yourself!</h1>
       </div>
       <div className='Login'>
         <p style={{textAlign: 'center'}}>Already have an account?<br/><a href="https://github.com/PaulKuruvila" rel='noopener noreferrer' target='_blank'>Click here.</a></p>
