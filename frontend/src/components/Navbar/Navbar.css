@@ -29,18 +29,31 @@
     opacity: 0.6;
 }
 
+.Login a {
+    color:rgb(60, 100, 130);
+    text-decoration: none;
+}
+
+.Login a:hover {
+    color: rgb(0, 135, 175);
+    opacity: 1;
+}
+
 .Login button::before {
-    content: "Login";
+    content: 'Sign Up';
     font-size: 18pt;
 }
 
 .Login button {
-    background-color: greenyellow;
-    content: 'Login';
+    background-color: rgb(160, 250, 50);
     width: fit-content;
     padding: 0 1rem 0 1rem;
     height: 3rem;
     border: 1px solid rgba(0, 0, 0, 0.35);
     border-radius: 15px;
     cursor: pointer;
+}
+
+.Login button:hover {
+    background-color: rgb(155, 230, 45);
 }
