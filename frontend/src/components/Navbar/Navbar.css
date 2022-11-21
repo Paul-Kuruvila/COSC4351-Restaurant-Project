@@ -30,6 +30,7 @@
 }
 
 .Login p {
+    text-align: center;
     margin-right: 1rem;
     font-size: 14pt;
     opacity: 0.6;
