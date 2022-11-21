@@ -7,12 +7,12 @@ import Login from './components/Login/Login';
 const App = () => {
     return (
         <Router>
-            <div className="App">
+            <div className='App'>
                 <Navbar />
                 <div className='content'>
                     <Routes>
-                        <Route exact path = "/" element={<Home />} />
-                        <Route path = "/login" element={<Login />} />
+                        <Route exact path = '/' element={<Home />} />
+                        <Route path = '/login' element={<Login />} />
                     </Routes>
                 </div>
             </div>

@@ -13,9 +13,9 @@ const Navbar = () => {
         <img src={logo}/>
         <h1>Seat Yourself!</h1>
       </div>
-      <div className='Login'>
-        <p>Already have an account?<br/><a href="/login" rel='noopener noreferrer'>Click here.</a></p>
-        <button onClick={() => redirectHandler('/signup')}/>
+      <div className='Login-Options'>
+        <p>Need to create an account?<br/><a href='/signup' rel='noopener noreferrer'>Sign up here.</a></p>
+        <button onClick={() => redirectHandler('/login')}/>
       </div>
     </div>
   );

@@ -24,34 +24,34 @@
     font-size: 28pt;
 }
 
-.Login {
+.Login-Options {
     display: flex;
     align-items: center;
 }
 
-.Login p {
+.Login-Options p {
     text-align: center;
     margin-right: 1rem;
     font-size: 14pt;
     opacity: 0.6;
 }
 
-.Login a {
+.Login-Options a {
     color:rgb(60, 100, 130);
     text-decoration: none;
 }
 
-.Login a:hover {
+.Login-Options a:hover {
     color: rgb(0, 135, 175);
     opacity: 1;
 }
 
-.Login button::before {
-    content: 'Sign Up';
+.Login-Options button::before {
+    content: 'Login';
     font-size: 18pt;
 }
 
-.Login button {
+.Login-Options button {
     background-color: rgb(160, 250, 50);
     width: fit-content;
     padding: 0 1rem 0 1rem;
@@ -61,6 +61,6 @@
     cursor: pointer;
 }
 
-.Login button:hover {
+.Login-Options button:hover {
     background-color: rgb(155, 230, 45);
 }
