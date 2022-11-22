@@ -6,8 +6,9 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "public"),
         filename: "main.js",
-    },
-    
+        publicPath: '/'
+    },    
+
     target: "web",
 
     devServer: {
@@ -16,6 +17,7 @@ module.exports = {
         open: true,
         hot: true,
         liveReload: true,
+        historyApiFallback: true
     },
 
     resolve: {
