@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     multipleStatements: true
 });
 
-function registerUser(username, password, request, response){
+function registerUser(username, password, request, response) { // done by Paul
     let registered = false;
     connection.query(`SELECT * FROM UserCredentials WHERE username = '${username}'`, function(error, results, fields) {
         if(error) throw error;
