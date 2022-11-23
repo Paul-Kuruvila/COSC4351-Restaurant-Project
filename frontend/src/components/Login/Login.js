@@ -33,17 +33,17 @@ const Login = () => {
       }
   }
   return (
-      <div className="login">
+      <div className="Login">
           <form onSubmit = {handleSubmit}>
               <ul className="signup-boxes">
-                  <li>
+                  <li className='usernameArea'>
                       <label className="userLabel">Username:</label>
                       <input id="username" className="inputbox" type="text" title="Please enter your username." required placeholder="Enter your username."
                       onChange = {(e) => setUsername(e.target.value)}
                       onSelect = {() => setValidity(true)}
                       />
                   </li>
-                  <li>
+                  <li className='passwordArea'>
                       <label className="passLabel">Password:</label>
                       <input id="password" className="inputbox" type="password" title="Please enter your password." required placeholder="Enter your password."
                       onChange = {(e) => setPassword(e.target.value)}
@@ -58,7 +58,7 @@ const Login = () => {
                   </li>
                   <div className="signup-text">
                       <p>Don't have an account?
-                          <a href="/register">Sign up here</a>.
+                          <br/><a href="/register">Sign up here</a>.
                       </p>
                   </div>
               </ul>
