@@ -43,7 +43,7 @@ function express_app(db) {  // export as function so that it can receive any spe
             });
         } else {
             response.status(400).send({
-                status: 'Please enter username and password! (BACKEND)'
+                status: 'Please enter username and password! (FROM BACKEND)'
             });
             console.log('Please enter username and password (BACKEND)');
             response.end();
