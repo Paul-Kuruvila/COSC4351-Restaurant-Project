@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <div className='Navbar'>
       <div className='Logo' onClick={() => redirectHandler('/')}>
-        <img src={logo}/>
+        <img src={logo} alt={"Logo"}/>
         <h1>Seat Yourself!</h1>
       </div>
       <div className='Login-Options'>
