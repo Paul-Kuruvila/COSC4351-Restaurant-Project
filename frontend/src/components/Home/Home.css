@@ -1,25 +1,21 @@
 .Home {
+    display: flex;
+    justify-content: center;
     background-color: rgba(100, 100, 100, 0.35);
     height: 76.09rem;
 }
 
-.Home {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 900px;
-}
-
-.ReserveBut button {
-    content: 'Login';
-    font-size: 45pt;
-}
-
-.ReserveBut button {
-    background-color: rgb(40, 153, 171);
-    width: fit-content;
+.ReserveButton {
+    background-color: rgb(0, 135, 175);
+    font-size: 28pt;
+    margin-top: 2em;
     padding: 0 1rem 0 1rem;
+    height: 3rem;
     border: 1px solid rgba(0, 0, 0, 0.35);
     border-radius: 15px;
     cursor: pointer;
+}
+
+.ReserveButton:hover {
+    background-color: rgba(60, 100, 130, 0.8);
 }

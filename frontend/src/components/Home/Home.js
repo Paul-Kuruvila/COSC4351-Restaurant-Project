@@ -7,9 +7,7 @@ const Home = () => {
   }
   return (
     <div className='Home'>
-      <div className = 'ReserveBut'>
-        <button onClick ={() => redirectHandler('/reserve')}> RESERVE SEATING HERE! </button>
-      </div>
+      <button className='ReserveButton' onClick ={() => redirectHandler('/reserve')}>RESERVE SEATING HERE!</button>
     </div>
   );
 }
