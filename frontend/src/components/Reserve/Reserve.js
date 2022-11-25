@@ -4,7 +4,7 @@ import './Reserve.css';
 const Reserve = () => {
 	//number of guests and date n time 
 	const [name, setName] = useState();
-	const [phonenum, setPhonenum] = useState();
+	const [phoneNum, setPhoneNum] = useState();
 	const [email, setEmail] = useState();
 	const [guests, setGuests] = useState();
 
@@ -37,7 +37,7 @@ const Reserve = () => {
 					<li className='guest-info'>
 						<label className='Label'>Phone Number:</label>
 						<input className='inputbox' type='text' title='Please enter your phone number.' required placeholder='Enter your phone number.'
-						onChange = {(e) => setPhonenum(e.target.value)}
+						onChange = {(e) => setPhoneNum(e.target.value)}
 						/>
 					</li>
 					<li className='guest-info'>
