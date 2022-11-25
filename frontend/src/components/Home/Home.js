@@ -1,14 +1,13 @@
 import './Home.css';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const redirectHandler = (ref) => {
-    window.location.href=`${ref}`;
-  }
-  
+  const navigate = useNavigate();
+
   return (
     <div className='Home'>
-      <button className='ReserveButton' onClick ={() => redirectHandler('/reserve')}>RESERVE SEATING HERE!</button>
+      <button className='ReserveButton' onClick ={() => navigate('/reserve')}>RESERVE SEATING HERE!</button>
     </div>
   );
 }

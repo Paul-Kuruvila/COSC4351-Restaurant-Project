@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Reserve.css';
 
 const Reserve = () => {
@@ -8,9 +9,7 @@ const Reserve = () => {
 	const [email, setEmail] = useState();
 	const [guests, setGuests] = useState();
 
-	const redirectHandler = (ref) => {
-		window.location.href=`${ref}`;
-	}
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => { //sending data
 		e.preventDefault();

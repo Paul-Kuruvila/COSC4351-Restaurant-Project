@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
 const Register = () => {
@@ -6,9 +7,7 @@ const Register = () => {
   const [password, setPassword] = useState();
   const [validCred, setValidity] = useState(true);
 
-  const redirectHandler = (ref) => {
-		window.location.href=`${ref}`;
-	}
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => { //sending data
 		e.preventDefault();
@@ -46,11 +45,6 @@ const Register = () => {
           <li>
             <button className="Submit" type="submit">Register</button>
           </li>
-          <div className="Login-Options">
-            <p>Don't have an account?
-              <br/><a href="/register">Sign up here</a>.
-            </p>
-          </div>
         </ul>
       </form>
     </div>
