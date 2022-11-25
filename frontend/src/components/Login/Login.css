@@ -3,7 +3,7 @@
     height: 76.09rem;
 }
 
-.signup-boxes {
+.information-boxes {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,16 +11,16 @@
     list-style: none;
 }
 
-.userLabel, .passLabel {
+.Label {
     font-size: 20pt;
     color: #4C2600;
 }
 
 .passwordArea {
-    margin: 1.5rem 0 2rem 0;
+    margin: 1.5rem 0 1.5rem 0;
 }
 
-#username, #password {
+.usernameArea input, .passwordArea input {
     display: inline-block;
     margin-left: 0.5rem;
     background-color: rgba(110, 110, 0, 0.5);
@@ -28,8 +28,8 @@
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
-#username::placeholder, #password::placeholder {
-    color: rgba(0, 0, 0, 0.6);
+.usernameArea input::placeholder, .passwordArea input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
 }
 
 .hideInvalid {
@@ -62,14 +62,4 @@
     text-align: center;
     font-size: 14pt;
     opacity: 0.6;
-}
-
-.signup-text a {
-    color:rgb(60, 100, 130);
-    text-decoration: none;
-}
-
-.signup-text a:hover {
-    color: rgb(0, 135, 175);
-    opacity: 1;
 }
