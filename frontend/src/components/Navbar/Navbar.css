@@ -37,12 +37,12 @@
 }
 
 .Login-Options a {
-    color:rgb(60, 100, 130);
+    color:rgb(0, 105, 135);
     text-decoration: none;
 }
 
 .Login-Options a:hover {
-    color: rgb(0, 135, 175);
+    color: rgb(60, 100, 130);
     opacity: 1;
 }
 
