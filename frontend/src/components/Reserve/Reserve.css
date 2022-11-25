@@ -1,0 +1,33 @@
+.Reserve {
+    background-color: rgba(100, 100, 100, 0.35);
+    height: 76.09rem;
+}
+
+.information-boxes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8rem;
+    list-style: none;
+    height: 100px;
+    
+}
+
+.Submit {
+    position: relative;
+    bottom: -20px;
+}
+
+.name, label {
+    font-size: 20pt;
+    color: #4C2600;
+}
+
+#names, #phonenumber, #email, #guests, #DT {
+    display: inline-block;
+    margin-left: 0.5rem;
+    background-color: rgba(110, 110, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}

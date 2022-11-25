@@ -69,14 +69,5 @@ const Login = () => {
 
 //SUBMIT BUTTON type = "submit" previously for validation, temporarily set to "button" to link to the other pages
 
-// import React from 'react';
-
-// const Login = () => {
-//   return (
-//     <div className='Login'>
-        
-//     </div>
-//   );
-// }
 
 export default Login;
