@@ -8,3 +8,5 @@ Our database name is seatyourself and it consists of the following tables:
 | username | varchar(255) | YES  |     | NULL    |                |
 | password | varchar(255) | NO   |     | NULL    |                |
 +----------+--------------+------+-----+---------+----------------+
+
+**GuestInfo** - create table ReservationInfo(name VARCHAR(255) NOT NULL, phonenum VARCHAR(255) NOT NULL, email VARCHAR(255), guestnum INT NOT NULL, datetime DATETIME NOT NULL);
