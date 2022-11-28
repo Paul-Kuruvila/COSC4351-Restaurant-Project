@@ -3,12 +3,32 @@
     height: 93.7vh;
 }
 
+input {
+    box-shadow: 1px 1px 5px;
+}
+
 .information-boxes {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 8rem;
+    padding: 8rem 0 8rem 0;
+    margin: 0 10rem 0 10rem;
     list-style: none;
+    box-shadow: 1px 1px 2px;
+}
+
+.information-boxes .container-title {
+    color: #4C2600;
+    text-shadow: 2px 2px 1px rgba(110, 110, 0, 0.5);
+    font-size: 28pt;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.information-boxes .container-description {
+    font-size: 14pt;
+    color: rgb(0, 105, 135);
+    padding-bottom: 1rem;
 }
 
 .Label {
@@ -45,7 +65,7 @@
 .Submit {
     font-size: 14pt;
     background-color: rgb(160, 250, 50);
-    width: fit-content;
+    width: 100px;
     padding: 0 0.5rem 0 0.5rem;
     height: 2.5rem;
     border: 1px solid rgba(0, 0, 0, 0.35);
@@ -56,6 +76,7 @@
 
 .Submit:hover {
     background-color: rgb(155, 230, 45);
+    box-shadow: 1px 1px 1px;
 }
 
 .signup-text {

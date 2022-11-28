@@ -34,8 +34,10 @@ const Login = () => {
 
   return (
     <div className="Login">
+        <div style={{height: '5rem'}}></div>
         <form onSubmit = {handleSubmit}>
             <ul className="information-boxes">
+                <label className='container-title'>LOGIN</label>
                 <li className='usernameArea'>
                     <label className="Label">Username:</label>
                     <input id="username" className="inputbox" type="text" title="Please enter your username." required placeholder="Enter your username."

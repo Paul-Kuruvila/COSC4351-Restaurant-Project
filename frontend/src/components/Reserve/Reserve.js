@@ -25,8 +25,11 @@ const Reserve = () => {
 
 	return (
 		<div className='Reserve'>
+			<div style={{height: '5rem'}}></div>
 			<form onSubmit = {handleSubmit}>
 				<ul className='information-boxes'>
+					<label className='container-title'>RESERVE A TABLE</label>
+					<text className='container-description'>Before you can reserve a table, we're going to need some information:</text>
 					<li className='guest-info'>
 						<label className='Label'>Name:</label>
 						<input className='inputbox' type='text' title='Please enter your name.' required placeholder='Enter your name.'

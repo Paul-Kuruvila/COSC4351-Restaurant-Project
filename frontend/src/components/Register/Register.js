@@ -23,8 +23,11 @@ const Register = () => {
 
   return (
     <div className='Register'>
+      <div style={{height: '5rem'}}></div>
       <form onSubmit = {handleSubmit}>
         <ul className="information-boxes">
+          <label className='container-title'>REGISTER</label>
+          <text className='container-description'>We're so excited you'll be joining us!<br />Please enter your desired credentials.</text>
           <li className='usernameArea'>
             <label className="Label">Username:</label>
             <input id="username" className="inputbox" type="text" title="Please enter the username you will use to sign in." required placeholder="Enter a desired username."
