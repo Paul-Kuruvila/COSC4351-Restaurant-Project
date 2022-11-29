@@ -13,11 +13,12 @@ const Register = () => {
 
   const handleSubmit = async (e) => { //sending data
 		e.preventDefault();
+    const userInfo = {username, password, email, phoneNum};
 		const options = {
 			method: 'POST',
 			headers: {"Content-Type": "application/json"},
 			//credentials: "include",
-			//body: JSON.stringify(loginData)
+			body: JSON.stringify(userInfo)
 		};
 
 		const response = await fetch('/register', options);
@@ -29,7 +30,7 @@ const Register = () => {
       <form onSubmit = {handleSubmit}>
         <ul className="information-boxes">
           <label className='container-title'>REGISTER</label>
-          <text className='container-description'>We're so excited you'll be joining us!<br />Please enter your desired credentials.</text>
+          <p className='container-description'>We're so excited you'll be joining us!<br />Please enter your desired credentials.</p>
           <ul className='boxes-container'>
             <li className='guest-info'>
               <label className='Label'>Username:</label>
@@ -47,14 +48,14 @@ const Register = () => {
             </li>
             <li className='guest-info'>
               <label className='Label'>Email:</label>
-              <input className='inputbox' type='text' title='Please enter your email.' required placeholder='Enter your email.'
+              <input className='inputbox' type='text' title='Please enter your email.' placeholder='Enter your email.'
               onChange = {(e) => setEmail(e.target.value)}
               />
               <text className='optional-text'>(Optional)</text>
             </li>
             <li className='guest-info'>
               <label className='Label'>Phone Number:</label>
-              <input className='inputbox' type='text' title='Please enter your phone number.' required placeholder='Enter your phone number.'
+              <input className='inputbox' type='text' title='Please enter your phone number.' placeholder='Enter your phone number.'
               onChange = {(e) => setPhoneNum(e.target.value)}
               />
               <text className='optional-text'>(Optional)</text>

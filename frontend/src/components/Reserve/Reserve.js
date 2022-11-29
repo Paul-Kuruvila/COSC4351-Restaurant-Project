@@ -29,7 +29,7 @@ const Reserve = () => {
 			<form onSubmit = {handleSubmit}>
 				<ul className='information-boxes'>
 					<label className='container-title'>RESERVE A TABLE</label>
-					<text className='container-description'>Before you can reserve a table, we're going to need some information:</text>
+					<p className='container-description'>Before you can reserve a table, we're going to need some information:</p>
 					<ul className='boxes-container'>
 						<li className='guest-info'>
 							<label className='Label'>Name:</label>

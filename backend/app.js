@@ -34,13 +34,15 @@ function express_app(db) {  // export as function so that it can receive any spe
     app.post('/register', function(request, response) {
         let username = request.body.username;
         let password = request.body.password;
+        let email = request.body.email;
+        let phoneNum = request.body.phoneNum;
 
         if(username && password) {
             console.log(`Attempting to register user ${username}...`);
-            db.registerUser(username, password, request, response);
-            response.send({
-                status: 'Registered user. (BACKEND)'
-            });
+            db.registerUser(username, password, email, phoneNum, request, response);
+            // response.send({
+            //     status: 'Registered user. (BACKEND)'
+            // });
         } else {
             response.status(400).send({
                 status: 'Please enter username and password! (FROM BACKEND)'

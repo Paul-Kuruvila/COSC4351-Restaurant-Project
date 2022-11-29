@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     multipleStatements: true
 });
 
-function registerUser(username, password, request, response) { // done by Paul
+function registerUser(username, password, email, phoneNum, request, response) { // done by Paul
     let registered = false;
     connection.query(`SELECT * FROM UserCredentials WHERE username = '${username}'`, function(error, results, fields) {
         if(error) throw error;
@@ -25,12 +25,13 @@ function registerUser(username, password, request, response) { // done by Paul
         } else {
             try {
                 // encrypt password using SHA2-256 hash function
-                connection.promise().query(`INSERT INTO UserCredentials (username, password) VALUES('${username}', SHA2('${password}', 256))`);
+                connection.promise().query(`INSERT INTO UserCredentials (username, password, phonenum, email) VALUES('${username}', SHA2('${password}', 256), '${phoneNum}', '${email}')`);
                 registered = true;
                 response.status(201).send({
                     status: 'Account created. (BACKEND)',
                     registered
                 });
+                console.log('Account created. (BACKEND)');
             }
             catch(err) {
                 console.log(err);

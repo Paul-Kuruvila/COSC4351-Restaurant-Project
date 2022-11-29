@@ -2,14 +2,16 @@
 
 **UserCredentials**
 
-``create table UserCredentials(userid INT NOT NULL AUTO_INCREMENT, username VARCHAR(255), password VARCHAR(255) NOT NULL, PRIMARY KEY(userid));``
+``create table UserCredentials(userid INT NOT NULL AUTO_INCREMENT, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, phonenum VARCHAR(10), email VARCHAR(255), PRIMARY KEY(userid));``
 ```
 +----------+--------------+------+-----+---------+----------------+
 | Field    | Type         | Null | Key | Default | Extra          |
 +----------+--------------+------+-----+---------+----------------+
 | userid   | int          | NO   | PRI | NULL    | auto_increment |
-| username | varchar(255) | YES  |     | NULL    |                |
+| username | varchar(255) | NO   |     | NULL    |                |
 | password | varchar(255) | NO   |     | NULL    |                |
+| phonenum | varchar(10)  | YES  |     | NULL    |                |
+| email    | varchar(255) | YES  |     | NULL    |                |
 +----------+--------------+------+-----+---------+----------------+
 ```
 **ReservationInfo**
