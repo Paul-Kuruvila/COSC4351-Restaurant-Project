@@ -13,14 +13,23 @@ const Reserve = () => {
 
 	const handleSubmit = async (e) => { //sending data
 		e.preventDefault();
+		const guestData = {name, phoneNum, email, guests};
 		const options = {
 			method: 'POST',
 			headers: {"Content-Type": "application/json"},
 			//credentials: "include",
-			//body: JSON.stringify(loginData)
+			body: JSON.stringify(guestData)
 		};
 
-		const response = await fetch('/auth', options);
+		const response = await fetch('/reserve', options);
+		const jsonData = await response.json();
+		if (jsonData.registered) { //if registration is successful
+            console.log(jsonData);
+            navigate.push('/register') //redirect to login page
+        }
+        else {
+            console.log(jsonData);
+        }
 	}
 
 	return (
