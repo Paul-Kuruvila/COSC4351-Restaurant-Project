@@ -1,6 +1,10 @@
 .Reserve {
     background-color: rgba(100, 100, 100, 0.35);
-    height: 93.7vh;
+    min-height: 93.7vh;
+}
+
+.guest-info {
+    margin-bottom: 1.5rem;
 }
 
 .guest-info input, #DT {
@@ -9,7 +13,17 @@
     background-color: rgba(110, 110, 0, 0.5);
     border: 1px solid rgba(0, 0, 0, 0.15);
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    margin-bottom: 1rem;
+}
+
+.guest-info input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.guest-info .optional-text {
+    font-size: 8pt;
+    position: absolute;
+    color: rgba(0, 0, 0, 0.6);
+    padding-left: 0.5rem;
 }
 
 #DT {

@@ -34,22 +34,26 @@ const Login = () => {
 
   return (
     <div className="Login">
+        <div style={{height: '5rem'}}></div>
         <form onSubmit = {handleSubmit}>
             <ul className="information-boxes">
-                <li className='usernameArea'>
-                    <label className="Label">Username:</label>
-                    <input id="username" className="inputbox" type="text" title="Please enter your username." required placeholder="Enter your username."
-                    onChange = {(e) => setUsername(e.target.value)}
-                    onSelect = {() => setValidity(true)}
-                    />
-                </li>
-                <li className='passwordArea'>
-                    <label className="Label">Password:</label>
-                    <input id="password" className="inputbox" type="password" title="Please enter your password." required placeholder="Enter your password."
-                    onChange = {(e) => setPassword(e.target.value)}
-                    onSelect = {() => setValidity(true)}
-                    />
-                </li>
+                <label className='container-title'>LOGIN</label>
+                <ul className='boxes-container'>
+                    <li className='usernameArea'>
+                        <label className="Label">Username:</label>
+                        <input id="username" className="inputbox" type="text" title="Please enter your username." required placeholder="Enter your username."
+                        onChange = {(e) => setUsername(e.target.value)}
+                        onSelect = {() => setValidity(true)}
+                        />
+                    </li>
+                    <li className='passwordArea'>
+                        <label className="Label">Password:</label>
+                        <input id="password" className="inputbox" type="password" title="Please enter your password." required placeholder="Enter your password."
+                        onChange = {(e) => setPassword(e.target.value)}
+                        onSelect = {() => setValidity(true)}
+                        />
+                    </li>
+                </ul>
                 <li>
                     <label className={validCred ? "hideInvalid" : "showInvalid"}>Invalid username/password. Please try again.</label>
                 </li>
