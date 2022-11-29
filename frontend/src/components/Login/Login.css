@@ -1,6 +1,6 @@
 .Login {
     background-color: rgba(100, 100, 100, 0.35);
-    height: 93.7vh;
+    min-height: 93.7vh;
 }
 
 input {
@@ -15,6 +15,15 @@ input {
     margin: 0 10rem 0 10rem;
     list-style: none;
     box-shadow: 1px 1px 2px;
+}
+
+.information-boxes .boxes-container {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    width: 500px;
+    align-items: flex-end;
+    margin-right: 13rem;
 }
 
 .information-boxes .container-title {

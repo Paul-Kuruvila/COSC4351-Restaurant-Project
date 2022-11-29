@@ -38,20 +38,22 @@ const Login = () => {
         <form onSubmit = {handleSubmit}>
             <ul className="information-boxes">
                 <label className='container-title'>LOGIN</label>
-                <li className='usernameArea'>
-                    <label className="Label">Username:</label>
-                    <input id="username" className="inputbox" type="text" title="Please enter your username." required placeholder="Enter your username."
-                    onChange = {(e) => setUsername(e.target.value)}
-                    onSelect = {() => setValidity(true)}
-                    />
-                </li>
-                <li className='passwordArea'>
-                    <label className="Label">Password:</label>
-                    <input id="password" className="inputbox" type="password" title="Please enter your password." required placeholder="Enter your password."
-                    onChange = {(e) => setPassword(e.target.value)}
-                    onSelect = {() => setValidity(true)}
-                    />
-                </li>
+                <ul className='boxes-container'>
+                    <li className='usernameArea'>
+                        <label className="Label">Username:</label>
+                        <input id="username" className="inputbox" type="text" title="Please enter your username." required placeholder="Enter your username."
+                        onChange = {(e) => setUsername(e.target.value)}
+                        onSelect = {() => setValidity(true)}
+                        />
+                    </li>
+                    <li className='passwordArea'>
+                        <label className="Label">Password:</label>
+                        <input id="password" className="inputbox" type="password" title="Please enter your password." required placeholder="Enter your password."
+                        onChange = {(e) => setPassword(e.target.value)}
+                        onSelect = {() => setValidity(true)}
+                        />
+                    </li>
+                </ul>
                 <li>
                     <label className={validCred ? "hideInvalid" : "showInvalid"}>Invalid username/password. Please try again.</label>
                 </li>

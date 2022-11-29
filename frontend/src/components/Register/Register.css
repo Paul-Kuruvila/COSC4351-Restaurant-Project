@@ -1,4 +1,4 @@
 .Register {
   background-color: rgba(100, 100, 100, 0.35);
-  height: 93.7vh;
+  min-height: 93.7vh;
 }
