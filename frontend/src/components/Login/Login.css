@@ -89,7 +89,7 @@ input {
     color: rgba(0, 0, 0, 0.4);
 }
 
-.hideInvalid {
+.hide {
     display: none;
 }
 

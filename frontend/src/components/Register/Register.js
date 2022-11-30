@@ -34,35 +34,33 @@ const Register = () => {
           <ul className='boxes-container'>
             <li className='guest-info'>
               <label className='Label'>Username:</label>
-              <input id='username' className='inputbox' type='text' title='Please enter the username you will use to sign in.' required placeholder='Enter a desired username.'
+              <input id='username' className='inputbox' type='text' minLength="2" maxLength="50" title='Please enter the username you will use to sign in.' required placeholder='Enter a desired username.'
               onChange = {(e) => setUsername(e.target.value)}
               onSelect = {() => setValidity(true)}
               />
             </li>
             <li className='guest-info'>
               <label className='Label'>Password:</label>
-              <input id='password' className='inputbox' type='password' title='Please enter the password you will use to sign in.' required placeholder='Enter a password.'
+              <input id='password' className='inputbox' type='password' minLength="2" maxLength="50" title='Please enter the password you will use to sign in.' required placeholder='Enter a password.'
               onChange = {(e) => setPassword(e.target.value)}
               onSelect = {() => setValidity(true)}
               />
             </li>
             <li className='guest-info'>
               <label className='Label'>Email:</label>
-              <input className='inputbox' type='text' title='Please enter your email.' placeholder='Enter your email.'
+              <input className='inputbox' type='text' title='Please enter your email.' minLength="4" maxLength="50" required placeholder='Enter your email.'
               onChange = {(e) => setEmail(e.target.value)}
               />
-              <text className='optional-text'>(Optional)</text>
             </li>
             <li className='guest-info'>
               <label className='Label'>Phone Number:</label>
-              <input className='inputbox' type='text' title='Please enter your phone number.' placeholder='Enter your phone number.'
+              <input className='inputbox' type='text' title='Please enter your phone number.' required placeholder='Enter your phone number.'
               onChange = {(e) => setPhoneNum(e.target.value)}
               />
-              <text className='optional-text'>(Optional)</text>
             </li>
           </ul>
           <li>
-            <label className={validCred ? 'hideInvalid' : 'showInvalid'}>Username already exists. Please try another one.</label>
+            <label className={validCred ? 'hide' : 'showInvalid'}>Username already exists. Please try another one.</label>
           </li>
           <li>
             <button className='Submit' type='submit'>Register</button>

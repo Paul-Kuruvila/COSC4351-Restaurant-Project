@@ -43,21 +43,21 @@ const Login = () => {
                 <ul className='boxes-container'>
                     <li className='usernameArea'>
                         <label className="Label">Username:</label>
-                        <input id="username" className="inputbox" type="text" title="Please enter your username." required placeholder="Enter your username."
+                        <input id="username" className="inputbox" type="text" title="Please enter your username." minLength="2" maxLength="50" required placeholder="Enter your username."
                         onChange = {(e) => setUsername(e.target.value)}
                         onSelect = {() => setValidity(true)}
                         />
                     </li>
                     <li className='passwordArea'>
                         <label className="Label">Password:</label>
-                        <input id="password" className="inputbox" type="password" title="Please enter your password." required placeholder="Enter your password."
+                        <input id="password" className="inputbox" type="password" title="Please enter your password." minLength="2" maxLength="50" required placeholder="Enter your password."
                         onChange = {(e) => setPassword(e.target.value)}
                         onSelect = {() => setValidity(true)}
                         />
                     </li>
                 </ul>
                 <li>
-                    <label className={validCred ? "hideInvalid" : "showInvalid"}>{LoggedIn ? <p>You are already logged in!<br/>Please sign out before proceeding.</p> : 'Invalid username/password. Please try again.' }</label>
+                    <label className={validCred ? "hide" : "showInvalid"}>{LoggedIn ? <p>You are already logged in!<br/>Please sign out before proceeding.</p> : 'Invalid username/password. Please try again.' }</label>
                 </li>
                 <li>
                     <button className="Submit" type="submit">Login</button>
