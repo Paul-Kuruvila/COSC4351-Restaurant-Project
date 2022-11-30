@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -86,7 +86,7 @@ function reserveUser(username, password, request, response) {
 
 }
 
-function specialDays(request, response){
+function specialDays(username, request, response){
     let name = request.body.name;
     let phonenum = request.body.phonenum;
     let email = request.body.email;
@@ -94,8 +94,10 @@ function specialDays(request, response){
 
     try{
         connection.query(`SELECT datetime FROM ReservationInfo WHERE userid = (SELECT userid FROM UserCredentials WHERE username = '${username}')`, (err, results) => { 
-            if (err) throw err;
+            //if (err) throw err;
+            /*if (results[0].datetime.getDay() === 6 || results[0].datetime.getDay() === 0) {
 
+            }*/
             console.log(results[0].datetime);
 
             //savedInfo = true;

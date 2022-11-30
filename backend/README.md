@@ -2,7 +2,7 @@
 
 **UserCredentials**
 
-``create table UserCredentials(userid INT NOT NULL AUTO_INCREMENT, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, phonenum VARCHAR(10), email VARCHAR(255), PRIMARY KEY(userid));``
+``create table UserCredentials(userid INT NOT NULL AUTO_INCREMENT, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, phonenum VARCHAR(10) NOT NULL, email VARCHAR(255) NOT NULL, PRIMARY KEY(userid));``
 ```
 +----------+--------------+------+-----+---------+----------------+
 | Field    | Type         | Null | Key | Default | Extra          |
