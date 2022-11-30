@@ -55,25 +55,25 @@ const Reserve = () => {
 		<div className='Reserve'>
 			<div style={{height: '5rem'}}></div>
 			<form onSubmit = {handleSubmit}>
-				<ul className={suggestRegister ? 'hideBoxes' : 'information-boxes'}>
+				<ul className={suggestRegister ? 'hide' : 'information-boxes'}>
 					<label className='container-title'>RESERVE A TABLE</label>
 					<p className='container-description'>Before you can reserve a table, we're going to need some information:</p>
 					<ul className='boxes-container'>
 						<li className='guest-info'>
 							<label className='Label'>Name:</label>
-							<input className='inputbox' type='text' title='Please enter your name.' required placeholder='Enter your name.'
+							<input className='inputbox' type='text' title='Please enter your name.' minLength="2" maxLength="50" required placeholder='Enter your name.'
 							onChange = {(e) => setName(e.target.value)}
 							/>
 						</li>
 						<li className='guest-info'>
 							<label className='Label'>Phone Number:</label>
-							<input className='inputbox' type='text' title='Please enter your phone number.' required placeholder='Enter your phone number.'
+							<input className='inputbox' type='text' title='Please enter your phone number.' minLength="10" maxLength="10" required placeholder='Enter your phone number.'
 							onChange = {(e) => setPhoneNum(e.target.value)}
 							/>
 						</li>
 						<li className='guest-info'>
 							<label className='Label'>Email:</label>
-							<input className='inputbox' type='text' title='Please enter your email.' required placeholder='Enter your email.'
+							<input className='inputbox' type='text' title='Please enter your email.' minLength="2" maxLength="100" required placeholder='Enter your email.'
 							onChange = {(e) => setEmail(e.target.value)}
 							/>
 						</li>
@@ -85,14 +85,20 @@ const Reserve = () => {
 						</li>
 							<form>
 								<label className='Label'>Date and Time:</label>
-								<input type='datetime-local' id='DT' name=''></input>
+								<input 
+									type='datetime-local'
+									id='DT'
+									name=''
+									min='2022-12-01T14:10'
+									max='2023-12-01T14:10'
+								/>
 							</form>
 					</ul>
 					<li>
 						<button className='Submit' type='submit'>Submit</button> 
 					</li>
 				</ul>
-				<ul className={suggestRegister ? 'information-boxes' : 'hideBoxes'}>
+				<ul className={suggestRegister ? 'information-boxes' : 'hide'}>
 					<label className='container-title2'>HEY, WE NOTICED YOU AREN'T LOGGED IN!</label>
 					<p className='container-description'>You can login <a href='login'>here</a>, or if you don't have an account, you can register <a href='register'>here</a>.</p>
 					<i className='container-option' onClick={() => ReserveAnyways()}>Proceed without registering</i>

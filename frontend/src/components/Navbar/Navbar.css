@@ -46,12 +46,8 @@
     opacity: 1;
 }
 
-.Login-Options button::before {
-    content: 'Login';
-    font-size: 18pt;
-}
-
 .Login-Options button {
+    font-size: 18pt;
     background-color: rgb(160, 250, 50);
     width: fit-content;
     padding: 0 1rem 0 1rem;
@@ -63,4 +59,17 @@
 
 .Login-Options button:hover {
     background-color: rgb(155, 230, 45);
+}
+
+.Login-Options .profile-button {
+    opacity: 1;
+    cursor: pointer;
+    color: rgb(0, 105, 135);
+}
+
+.Login-Options .profile-button:hover {
+    opacity: 1;
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(0, 105, 30);
 }
