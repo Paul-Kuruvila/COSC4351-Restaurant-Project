@@ -82,7 +82,16 @@ function authUser(username, password, request, response) {
     });
 }
 
-function reserveUser(username, password, request, response) {
+function reserveUser(username, name, email, phoneNum, guests, credit, datetime, request, response) {
+    try {
+        // encrypt password using SHA2-256 hash function
+        connection.promise().query(`INSERT INTO ReservationInfo (name, phonenum, email, guestnum, datetime, credit) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${datetime}', '${credit}')`);
+        console.log('Info Reserved. (BACKEND)');
+    }
+    catch(err) {
+        console.log(err);
+        console.log('Unexpected error occurred.');
+    }
 
 }
 
@@ -98,10 +107,16 @@ function specialDays(username, request, response){
             /*if (results[0].datetime.getDay() === 6 || results[0].datetime.getDay() === 0) {
 
             }*/
+            console.log("hello");
             console.log(results[0].datetime);
 
             //savedInfo = true;
-        })               
+        })     
+        response.send({
+            status: 'Successfully logged in. (FROM BACKEND)',
+            login,
+            username
+        });       
     }
     catch(err){
         console.log(err);
@@ -113,5 +128,6 @@ function specialDays(username, request, response){
 module.exports = {
     registerUser,
     authUser,
-    specialDays
+    specialDays,
+    reserveUser
 }
