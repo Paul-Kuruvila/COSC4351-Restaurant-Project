@@ -47,6 +47,13 @@ const Reserve = () => {
 		}
 	}
 
+	function requireNums(e){ // prevents characters from being typed
+		if (e.key.length === 1 && isNaN(e.key) && !e.ctrlKey || e.key === '.' && e.target.value.toString().indexOf('.') > -1) {
+				e.preventDefault();
+				console.log('Please enter a number!');
+		}
+	}
+
 	const ReserveAnyways = async () => {
 		setSuggestRegister(false);
 	}
@@ -69,6 +76,7 @@ const Reserve = () => {
 							<label className='Label'>Phone Number:</label>
 							<input className='inputbox' type='text' title='Please enter your phone number.' minLength="10" maxLength="10" required placeholder='Enter your phone number.'
 							onChange = {(e) => setPhoneNum(e.target.value)}
+							onKeyPress = {(e) => requireNums(e)}
 							/>
 						</li>
 						<li className='guest-info'>
@@ -81,6 +89,7 @@ const Reserve = () => {
 							<label className='Label'>Number of Guests:</label>
 							<input className='inputbox' type='text' title='Please enter the number of guests.' required placeholder='Enter the number of guests.'
 							onChange = {(e) => setGuests(e.target.value)}
+							onKeyPress = {(e) => requireNums(e)}
 						/>
 						</li>
 							<form>
