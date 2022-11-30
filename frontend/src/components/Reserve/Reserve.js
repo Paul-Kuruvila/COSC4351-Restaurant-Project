@@ -5,6 +5,9 @@ import './Reserve.css';
 const Reserve = () => {
 	//number of guests and date n time 
 	const [name, setName] = useState();
+	const [datetime, setDateTime] = useState();
+	const [hightraffic, setHighTraffic] = useState(false);
+	const [credit, setCredit] = useState();
 	const [phoneNum, setPhoneNum] = useState();
 	const [email, setEmail] = useState();
 	const [guests, setGuests] = useState();
@@ -27,9 +30,13 @@ const Reserve = () => {
 
 	const navigate = useNavigate();
 
+	const specialDays = async() => {
+
+	}
+
 	const handleSubmit = async (e) => { //sending data
 		e.preventDefault();
-		const guestData = {name, phoneNum, email, guests};
+		const guestData = {name, phoneNum, email, guests, datetime, credit};
 		const options = {
 			method: 'POST',
 			headers: {"Content-Type": "application/json"},
@@ -100,6 +107,7 @@ const Reserve = () => {
 									name=''
 									min='2022-12-01T14:10'
 									max='2023-12-01T14:10'
+									onChange = {(e) => setDateTime(e.target.value)} 
 								/>
 							</form>
 					</ul>
