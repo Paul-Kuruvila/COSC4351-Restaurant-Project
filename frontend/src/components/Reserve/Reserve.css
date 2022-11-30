@@ -29,3 +29,7 @@
 #DT {
     margin-bottom: 2rem;
 }
+
+.hideBoxes {
+    display: none;
+}

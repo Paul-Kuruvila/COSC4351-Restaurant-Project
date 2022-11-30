@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Reserve.css';
 
@@ -8,6 +8,22 @@ const Reserve = () => {
 	const [phoneNum, setPhoneNum] = useState();
 	const [email, setEmail] = useState();
 	const [guests, setGuests] = useState();
+	const [suggestRegister, setSuggestRegister] = useState(false);
+
+	useEffect(() => {
+		const checkLoginStatus = async () => {
+			const response = await fetch('/loginstatus');
+			const jsonData = await response.json();
+			console.log(jsonData);
+			console.log(jsonData[1]);
+			setSuggestRegister(!jsonData[1]);
+		}
+
+		console.log("User loaded the Reservation page... and we check if they are logged in. If they are not logged in, we will prompt them to register.");
+
+		checkLoginStatus()
+			.catch(console.error);
+	}, [])
 
 	const navigate = useNavigate();
 
@@ -23,20 +39,23 @@ const Reserve = () => {
 
 		const response = await fetch('/reserve', options);
 		const jsonData = await response.json();
-		if (jsonData.registered) { //if registration is successful
-            console.log(jsonData);
-            navigate.push('/register') //redirect to login page
-        }
-        else {
-            console.log(jsonData);
-        }
+		if (jsonData.reserved) { //if registration is successful
+			console.log(jsonData);
+			navigate('/register') //redirect to login page
+		} else {
+			console.log(jsonData);
+		}
+	}
+
+	const ReserveAnyways = async () => {
+		setSuggestRegister(false);
 	}
 
 	return (
 		<div className='Reserve'>
 			<div style={{height: '5rem'}}></div>
 			<form onSubmit = {handleSubmit}>
-				<ul className='information-boxes'>
+				<ul className={suggestRegister ? 'hideBoxes' : 'information-boxes'}>
 					<label className='container-title'>RESERVE A TABLE</label>
 					<p className='container-description'>Before you can reserve a table, we're going to need some information:</p>
 					<ul className='boxes-container'>
@@ -72,6 +91,11 @@ const Reserve = () => {
 					<li>
 						<button className='Submit' type='submit'>Submit</button> 
 					</li>
+				</ul>
+				<ul className={suggestRegister ? 'information-boxes' : 'hideBoxes'}>
+					<label className='container-title2'>HEY, WE NOTICED YOU AREN'T LOGGED IN!</label>
+					<p className='container-description'>You can login <a href='login'>here</a>, or if you don't have an account, you can register <a href='register'>here</a>.</p>
+					<i className='container-option' onClick={() => ReserveAnyways()}>Proceed without registering</i>
 				</ul>
 			</form>
 		</div>
