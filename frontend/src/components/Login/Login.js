@@ -7,6 +7,7 @@ const Login = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [validCred, setValidity] = useState(true);
+  const [LoggedIn, setLoginStatus] = useState(false);
 
   const handleSubmit = async (e) => { //sending data
     e.preventDefault();
@@ -22,11 +23,12 @@ const Login = () => {
     const jsonData = await response.json();
 
     setValidity(jsonData.login);
+    setLoginStatus(jsonData.loginstatus)
       
     if (jsonData.login) { //if login status is true/successful
         console.log(jsonData);
         navigate('/') //redirect to home page
-        document.location.reload('true');
+        //document.location.reload('true');
     } else {
         console.log(jsonData);
     }
@@ -55,7 +57,7 @@ const Login = () => {
                     </li>
                 </ul>
                 <li>
-                    <label className={validCred ? "hideInvalid" : "showInvalid"}>Invalid username/password. Please try again.</label>
+                    <label className={validCred ? "hideInvalid" : "showInvalid"}>{LoggedIn ? <p>You are already logged in!<br/>Please sign out before proceeding.</p> : 'Invalid username/password. Please try again.' }</label>
                 </li>
                 <li>
                     <button className="Submit" type="submit">Login</button>

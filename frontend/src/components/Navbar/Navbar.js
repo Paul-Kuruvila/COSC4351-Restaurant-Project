@@ -13,7 +13,7 @@ const Navbar = () => {
         <h1>Seat Yourself!</h1>
       </div>
       <div className='Login-Options'>
-        <p>Need to create an account?<br/><a href='/signup' rel='noopener noreferrer'>Sign up here.</a></p>
+        <p>Need to create an account?<br/><a href='/register' rel='noopener noreferrer'>Sign up here.</a></p>
         <button onClick={() => navigate('/login')}/>
       </div>
     </div>
