@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -81,9 +81,30 @@ function authUser(username, password, request, response) {
     });
 }
 
+function specialDays(request, response){
+    let name = request.body.name;
+    let phonenum = request.body.phonenum;
+    let email = request.body.email;
+    let guests = request.body.guests;
+
+    try{
+        connection.query(`SELECT datetime FROM ReservationInfo WHERE userid = (SELECT userid FROM UserCredentials WHERE username = '${username}')`, (err, results) => { 
+            if (err) throw err;
+
+            console.log(results[0].datetime);
+
+            //savedInfo = true;
+        })               
+    }
+    catch(err){
+        console.log(err);
+        console.log("Fuel cost could not be updated.");
+    }
+}
 // Add reserveTable, etc. functions
 
 module.exports = {
     registerUser,
-    authUser
+    authUser,
+    specialDays
 }
