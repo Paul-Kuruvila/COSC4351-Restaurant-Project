@@ -55,6 +55,7 @@ function authUser(username, password, request, response) {
             console.log("You are already logged in! (BACKEND)");
             return response.send({
                 status: 'You are already logged in! (FROM BACKEND)',
+                loginstatus: true
             });
         }
         if (results.length > 0) {
@@ -79,6 +80,10 @@ function authUser(username, password, request, response) {
         }			
         response.end();
     });
+}
+
+function reserveUser(username, password, request, response) {
+
 }
 
 // Add reserveTable, etc. functions
