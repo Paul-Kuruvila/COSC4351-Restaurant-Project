@@ -60,7 +60,7 @@ const Login = () => {
                     <label className={validCred ? "hide" : "showInvalid"}>{LoggedIn ? <p>You are already logged in!<br/>Please sign out before proceeding.</p> : 'Invalid username/password. Please try again.' }</label>
                 </li>
                 <li>
-                    <button className="Submit" type="submit">Login</button>
+                    <button id = "button" className="Submit" type="submit">Login</button>
                 </li>
                 <div className="Login-Options">
                     <p>Don't have an account?

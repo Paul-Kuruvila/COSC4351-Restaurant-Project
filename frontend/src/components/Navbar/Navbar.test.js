@@ -31,7 +31,7 @@ describe("Test Navbar form", () => {
         <BrowserRouter>
             <Navbar/>
         </BrowserRouter>);
-        const text = await screen.getByTestId("text"); 
+        const text = await screen.getByTextId("text"); 
         expect(text).toBeInTheDocument();
     });
     test('Navbar button functions properly', async  () => {
