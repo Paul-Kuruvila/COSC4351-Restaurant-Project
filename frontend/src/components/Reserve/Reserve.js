@@ -23,11 +23,11 @@ const Reserve = () => {
 		let data = [];
 		try {
 			data = await profileData();
+			console.log(data);
 			setName(data.name);
-			setDateTime(data.datetime);
-			setPhoneNum(data.phoneNum);
-			setEmail(data.email);
-			setGuests(data.guests);
+			if(data.phonenum !== "undefined")
+				setPhoneNum(data.phonenum);
+			//setEmail(data.email);
 		} catch (e) {
 			console.log("Error fetching profile data from backend");
 			//console.log(e);
@@ -83,7 +83,7 @@ const Reserve = () => {
 		//The jsonData has a status that is returned to let us know if the reservation was successful or failed, and why it failed.
 		if (jsonData.reserved && !jsonData.login) { //if reservation is successful and not logged in
 			console.log(jsonData);
-			navigate('/register') //redirect to registration page and notify of successful registration
+			//navigate('/register') //redirect to registration page and notify of successful registration
 		} else if (jsonData.reserved) { //if reservation was successful and logged in
 			console.log(jsonData);
 			//navigate('success') //redirect to successful reservation OR we can simply do the container box text that pops up

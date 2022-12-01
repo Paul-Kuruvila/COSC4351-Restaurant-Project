@@ -119,7 +119,7 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, request,
 function getProfile(username, request, response){
     if (request.session.loggedin || request.body.loggedin === 'yes') { // request.body.loggedin will never evaluate to 'yes' aside from testing purposes
         console.log(`Attempting to retrieve stored information for ${username}...`);
-        connection.query(`SELECT name, email, billaddress, diner, payment FROM ProfileInfo WHERE (SELECT userid FROM UserCredentials WHERE username = '${username}') = ProfileInfo.userid`, (err, results) => {
+        connection.query(`SELECT name, email, billaddress, diner, payment, phonenum FROM ProfileInfo WHERE (SELECT userid FROM UserCredentials WHERE username = '${username}') = ProfileInfo.userid`, (err, results) => {
             if (err) throw err;
 
             var data;
@@ -138,6 +138,8 @@ function getProfile(username, request, response){
 function saveProfile(username, name, email, phoneNum, billaddress, diner, payment, request, response) {
     let login = request.session.loggedin;
     let savedInfo = false;
+
+    console.log(`phone num is ${phoneNum}`);
 
     try {
         connection.promise().query(
