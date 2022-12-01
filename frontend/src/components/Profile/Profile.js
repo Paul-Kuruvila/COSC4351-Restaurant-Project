@@ -177,7 +177,7 @@ const Profile = ({label}) => {
                 </li>
                 <li>
                     <div id="save" className = "submitbutton">
-                        <button data-testid="Submit"  className="Submit" type="submit" onClick={(e) => checkFields(e)}>Save{label}</button> //this needs to pass in e?
+                        <button data-testid="Submit"  className="Submit" type="submit" onClick={(e) => checkFields(e)}>Save{label}</button> 
                     </div>
                 </li>
                 <div id="fuelquote" className = "submitbutton">

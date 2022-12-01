@@ -6,7 +6,7 @@ const Reserve = () => {
 	const navigate = useNavigate();
 	//number of guests and date n time 
 	const [name, setName] = useState();
-	const [datetime, setDateTime] = useState();
+	const [datetime, setDateTime] = useState("test");
 	const [hightraffic, setHighTraffic] = useState(false);
 	const [credit, setCredit] = useState();
 	const [phoneNum, setPhoneNum] = useState();
@@ -56,11 +56,14 @@ const Reserve = () => {
 	const specialDays = async(e) => {
 		setDateTime(e.target.value);
 		console.log(datetime);
+		//console.log(typeof(datetime));
 		var date = datetime.slice(0,10);
 		console.log(date);
+		const finDate = new Date(date);
+		console.log(finDate.getDay());
 
-		if (date.getDay() === 6 || date.getDay() === 0 || date.slice(5,11) == "06-04" || date.slice(5,11) == "12-25") {
-			hightraffic = true;
+		if (finDate.getDay() === 6 || finDate.getDay() === 5) {//|| date.slice(5,11) == "06-04" || date.slice(5,11) == "12-25") {
+			setHighTraffic(true);
 		}
 	}
 
@@ -136,11 +139,11 @@ const Reserve = () => {
 							onChange = {(e) => setGuests(e.target.value)}
 							onKeyPress = {(e) => requireNums(e)}
 							value = {guests}
-						/>
+							/>
 						</li>
 							<form>
 								<label className='Label'>Date and Time:</label>
-								<input 
+								<input
 									type='datetime-local'
 									id='DT'
 									name=''
@@ -154,10 +157,15 @@ const Reserve = () => {
 						<button className='Submit' type='submit'>Submit</button> 
 					</li>
 					<li>
-                    	<label className={hightraffic ? "hide" : "showInvalid"}>{hightraffic ? <p>High traffic days required a valid credit card.<br/>Please enter your credit card information.</p> : 'May require credit card information on a high traffic day.'}</label>
+						<ul className={hightraffic ? "show" : "hide"}>
+							<label className= "labels"> High traffic days required a valid credit card. Please enter your credit card information.</label>
+							<input className='inputbox' type='text' title='Please enter your credit card information.' required placeholder='Enter your credit card information.'
+							onChange = {(e) => setCredit(e.target.value)}
+							onKeyPress = {(e) => requireNums(e)}
+							value = {credit}
+							/>
+						</ul>
                 	</li>
-					
-					
 				</ul>
 				<ul className={suggestRegister ? 'information-boxes' : 'hide'}>
 					<label className='container-title2'>HEY, WE NOTICED YOU AREN'T LOGGED IN!</label>
@@ -170,3 +178,4 @@ const Reserve = () => {
 }
 
 export default Reserve;
+//<label className={hightraffic ? "hide" : "showInvalid"}>{hightraffic ? <p>High traffic days required a valid credit card.<br/>Please enter your credit card information.</p> : 'May require credit card information on a high traffic day.'}</label>
