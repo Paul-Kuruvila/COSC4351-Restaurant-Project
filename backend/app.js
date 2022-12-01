@@ -82,6 +82,24 @@ function express_app(db) {  // export as function so that it can receive any spe
         
     });
 
+    app.post('/profile', function(request, response) {
+        let username = request.body.username;
+        let name = request.body.name;
+        let email = request.body.mailaddress;
+        let billaddress = request.body.billaddress;
+        let diner = request.body.diner;
+        let payment = request.body.payment;
+
+    
+        console.log(`Attempting to save profile ${username}...`);
+
+        db.saveProfile(username, name, email, billaddress, diner, payment, request, response);
+
+        
+    });
+
+
+
 
     app.post('/auth', function(request, response) { //authenticating user logins //done by Eric
         // Capture the input fields

@@ -1,5 +1,5 @@
 import './Profile.css'
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 
 //html/validation/etc. handled by Paul; http requests handled by Eric ; button handler for testing by David
@@ -135,7 +135,7 @@ const Profile = ({label}) => {
                     />
                 </li>
                 <li className='guest-info'>
-                    <label>Address 1</label>
+                    <label>Mailing Address</label>
                     <input className="inputbox" id="address" type="text" minLength="2" maxLength="100"  required placeholder="Enter your mailing address."
                     value = {mailaddress}
                     onChange = {(e) => setMailAddress(e.target.value)}
@@ -144,7 +144,7 @@ const Profile = ({label}) => {
                     />
                 </li>
                 <li className='guest-info'>
-                    <label>Address 2</label>
+                    <label>Billing Address</label>
                     <input className="inputbox" id="address2" type="text" maxLength="100" placeholder="Enter your billing address, if applicable."
                     value = {billaddress}
                     onChange = {(e) => setBillAddress(e.target.value)}
@@ -156,6 +156,7 @@ const Profile = ({label}) => {
                     <input className="inputbox" id="diner#" type="text" minLength="2" maxLength="100" required placeholder="Enter your preferred diner number."
                     value = {diner}
                     onChange = {(e) => setDiner(e.target.value)}
+                    onKeyPress = {(e) => requireNums(e)}
                     onSelect = {(e) => checkEmpty(e)}
                     readOnly="readonly"
                     />

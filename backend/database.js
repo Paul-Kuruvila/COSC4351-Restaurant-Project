@@ -104,10 +104,33 @@ function reserveUser(username, name, email, phoneNum, guests, credit, datetime, 
     });
 
 }
+ 
+function saveProfile(username, name, email, billaddress, diner, payment, request, response) {
+    connection.query(`INSERT INTO ProfileInfo (name, phonenum, email, billaddress, diner, payment) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${billaddress}', '${diner}', '${payment}')`, function(error, results, fields) {
+        if(error) throw error;
+        try {
+            response.status(201).send({
+                status: 'Profile info saved. (BACKEND)'
+            });
+            console.log('Profile info saved. (BACKEND)');
+            
+            
+        }
+        catch(error) {
+            response.status(401).send({
+                status: 'Profile info failed to save. (FROM BACKEND)',
+            });
+            console.log(error);
+            console.log('Unexpected error occurred.');
+        }
+        response.end();
+    });
+}
 // Add reserveTable, etc. functions
 
 module.exports = {
     registerUser,
     authUser,
-    reserveUser
+    reserveUser,
+    saveProfile
 }
