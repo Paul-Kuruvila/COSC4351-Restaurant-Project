@@ -24,7 +24,7 @@
 | id       | int          | NO   | PRI | NULL    | auto_increment |
 | userid   | int          | YES  |     | NULL    |                |
 | name     | varchar(255) | NO   |     | NULL    |                |
-| phonenum | varchar(255) | NO   |     | NULL    |                |
+| phonenum | varchar(10)  | NO   |     | NULL    |                |
 | email    | varchar(255) | YES  |     | NULL    |                |
 | guestnum | int          | NO   |     | NULL    |                |
 | datetime | datetime     | NO   |     | NULL    |                |
@@ -38,12 +38,12 @@
 +-------------+--------------+------+-----+---------+----------------+
 | Field       | Type         | Null | Key | Default | Extra          |
 +-------------+--------------+------+-----+---------+----------------+
-| id          | int          | NO   | PRI | NULL    | auto_increment |
-| userid      | int          | NO   |     | NULL    |                |
+| userid      | int          | NO   | PRI | NULL    |                |
 | name        | varchar(255) | NO   |     | NULL    |                |
 | email       | varchar(255) | YES  |     | NULL    |                |
 | billaddress | varchar(255) | YES  |     | NULL    |                |
 | diner       | int          | NO   |     | NULL    |                |
 | payment     | varchar(255) | YES  |     | NULL    |                |
+| phonenum    | varchar(10)  | NO   |     | NULL    |                |
 +-------------+--------------+------+-----+---------+----------------+
 ```
