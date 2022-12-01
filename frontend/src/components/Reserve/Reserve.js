@@ -30,8 +30,16 @@ const Reserve = () => {
 
 	const navigate = useNavigate();
 
-	const specialDays = async() => {
+	//console.log(datetime);
+	const specialDays = async(e) => {
+		setDateTime(e.target.value);
+		console.log(datetime);
+		var date = datetime.slice(0,10);
+		console.log(date);
 
+		if (date.getDay() === 6 || date.getDay() === 0 || date.slice(5,11) == "06-04" || date.slice(5,11) == "12-25") {
+			
+		}
 	}
 
 	const handleSubmit = async (e) => { //sending data
@@ -107,7 +115,7 @@ const Reserve = () => {
 									name=''
 									min='2022-12-01T14:10'
 									max='2023-12-01T14:10'
-									onChange = {(e) => setDateTime(e.target.value)} 
+									onChange = {(e) => specialDays(e)} 
 								/>
 							</form>
 					</ul>
