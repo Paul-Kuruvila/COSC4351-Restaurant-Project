@@ -136,7 +136,7 @@ const Profile = ({label}) => {
                 </li>
                 <li className='guest-info'>
                     <label>Mailing Address</label>
-                    <input className="inputbox" id="mailaddress" type="text" minLength="2" maxLength="100"  required placeholder="Enter your mailing address."
+                    <input className="inputbox" id="mailaddress" type="text" minLength="1" maxLength="100"  required placeholder="Enter your mailing address."
                     value = {mailaddress}
                     onChange = {(e) => setMailAddress(e.target.value)}
                     onSelect = {(e) => checkEmpty(e)}
