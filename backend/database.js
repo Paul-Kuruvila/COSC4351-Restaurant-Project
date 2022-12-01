@@ -82,27 +82,39 @@ function authUser(username, password, request, response) {
     });
 }
 
-function reserveUser(username, name, email, phoneNum, guests, credit, datetime, request, response) {
-    connection.query(`INSERT INTO ReservationInfo (name, phonenum, email, guestnum, datetime, credit) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${datetime}', '${credit}')`, function(error, results, fields) {
+function reserveUser(username, name, email, phoneNum, guests, datetime, request, response) { //removed credit for now
+    let reserved = false;
+
+    connection.query(`SELECT * FROM ReservationInfo WHERE phonenum = '${phoneNum}'`, function(error, results, fields) {
         if(error) throw error;
-        try {
-            response.status(201).send({
-                status: 'Info Reserved. (BACKEND)'
+        if(results.length > 0) {
+            response.send({
+                status: 'There is already a reservation under this phone number! (BACKEND)',
             });
-            console.log('Info Reserved. (BACKEND)');
-            
-            
+            console.log('There is already a reservation under this phone number! (BACKEND)');
         }
-        catch(error) {
-            response.status(401).send({
-                status: 'Info failed to reserve. (FROM BACKEND)',
-            });
-            console.log(error);
-            console.log('Unexpected error occurred.');
+        else{
+           
+            try {
+                connection.query(`INSERT INTO ReservationInfo (name, phonenum, email, guestnum, datetime) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${datetime}')`);
+                reserved = true;
+                response.status(201).send({
+                    status: 'Info Reserved. (BACKEND)',
+                    reserved
+                });
+                console.log('Info Reserved. (BACKEND)');
+            }
+            catch(error) {
+                response.status(401).send({
+                    status: 'Info failed to reserve. (FROM BACKEND)',
+                });
+                console.log(error);
+                console.log('Unexpected error occurred.');
+            }
         }
         response.end();
+        
     });
-
 }
  
 function saveProfile(username, name, email, billaddress, diner, payment, request, response) {

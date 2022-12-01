@@ -71,14 +71,14 @@ function express_app(db) {  // export as function so that it can receive any spe
         let email = request.body.email;
         let phoneNum = request.body.phoneNum;
         let guests = request.body.guests;
-        let credit = request.body.credit;
+        //let credit = request.body.credit;
         let datetime = request.body.datetime;
 
     
         console.log(`Attempting to reserve ${username}...`);
 
-        db.reserveUser(username, name, email, phoneNum, guests, credit, datetime, request, response);
-
+        //db.reserveUser(username, name, email, phoneNum, guests, credit, datetime, request, response);
+        db.reserveUser(username, name, email, phoneNum, guests, datetime, request, response);
         
     });
 

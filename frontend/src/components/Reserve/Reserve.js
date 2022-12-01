@@ -107,6 +107,7 @@ const Reserve = () => {
 							<label className='Label'>Name:</label>
 							<input className='inputbox' type='text' title='Please enter your name.' minLength="2" maxLength="50" required placeholder='Enter your name.'
 							onChange = {(e) => setName(e.target.value)}
+							value = {name}
 							/>
 						</li>
 						<li className='guest-info'>
@@ -114,12 +115,14 @@ const Reserve = () => {
 							<input className='inputbox' type='text' title='Please enter your phone number.' minLength="10" maxLength="10" required placeholder='Enter your phone number.'
 							onChange = {(e) => setPhoneNum(e.target.value)}
 							onKeyPress = {(e) => requireNums(e)}
+							value = {phoneNum}
 							/>
 						</li>
 						<li className='guest-info'>
 							<label className='Label'>Email:</label>
 							<input className='inputbox' type='text' title='Please enter your email.' minLength="2" maxLength="100" required placeholder='Enter your email.'
 							onChange = {(e) => setEmail(e.target.value)}
+							value = {email}
 							/>
 						</li>
 						<li className='guest-info'>
@@ -127,6 +130,7 @@ const Reserve = () => {
 							<input className='inputbox' type='text' title='Please enter the number of guests.' required placeholder='Enter the number of guests.'
 							onChange = {(e) => setGuests(e.target.value)}
 							onKeyPress = {(e) => requireNums(e)}
+							value = {guests}
 						/>
 						</li>
 							<form>
