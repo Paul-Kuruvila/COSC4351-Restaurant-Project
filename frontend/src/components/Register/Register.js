@@ -22,6 +22,7 @@ const Register = () => {
 		};
 
 		const response = await fetch('/register', options);
+    navigate('/');
 	}
 
   return (
@@ -54,7 +55,7 @@ const Register = () => {
             </li>
             <li className='guest-info'>
               <label className='Label'>Phone Number:</label>
-              <input className='inputbox' type='text' title='Please enter your phone number.' required placeholder='Enter your phone number.'
+              <input className='inputbox' type='text' title='Please enter your phone number.' minLength="10" maxLength="10" required placeholder='Enter your phone number.'
               onChange = {(e) => setPhoneNum(e.target.value)}
               />
             </li>
