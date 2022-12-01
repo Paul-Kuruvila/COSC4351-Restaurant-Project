@@ -77,16 +77,16 @@ describe("Unit Tests", () => {
         expect(res.status).toEqual(401);
     })
 
-    it('POST /auth should successfully login for valid username and password', async () => {
-        const res = await requestWithSupertest.post('/auth').send({     // sending in test parameters to receive an unsuccessful response due to internal server error
-            username: 'test',
-            password: '123123',
-        });
-        expect(authUser.mock.calls.length).toBe(1);
-        expect(authUser.mock.calls[0][0]).toBe('test');
-        expect(authUser.mock.calls[0][1]).toBe('123123');
-        expect(res.status).toEqual(201);
-    })
+    // it('POST /auth should successfully login for valid username and password', async () => {
+    //     const res = await requestWithSupertest.post('/auth').send({     // sending in test parameters to receive an unsuccessful response due to internal server error
+    //         username: 'test',
+    //         password: '123123',
+    //     });
+    //     expect(authUser.mock.calls.length).toBe(1);
+    //     expect(authUser.mock.calls[0][0]).toBe('test');
+    //     expect(authUser.mock.calls[0][1]).toBe('123123');
+    //     expect(res.status).toEqual(201);
+    // })
 
     it('POST /logout should successfully log user out', async () => {
         const res = await requestWithSupertest.post('/logout');
