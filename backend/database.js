@@ -157,7 +157,7 @@ function saveProfile(username, name, email, phoneNum, billaddress, diner, paymen
     }
 }
 
-connection.end();
+//connection.end();
 
 module.exports = {
     registerUser,
