@@ -33,7 +33,7 @@
 ```
 **ProfileInfo**
 
-``create table ProfileInfo(id INT NOT NULL AUTO_INCREMENT, userid INT NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255), billaddress VARCHAR(255), diner INT NOT NULL, payment VARCHAR(255), PRIMARY KEY(id));``
+``create table ProfileInfo(id INT NOT NULL AUTO_INCREMENT, userid INT NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255), phonenum VARCHAR(10), billaddress VARCHAR(255), diner INT NOT NULL, payment VARCHAR(255), PRIMARY KEY(id));``
 ```
 +-------------+--------------+------+-----+---------+----------------+
 | Field       | Type         | Null | Key | Default | Extra          |
