@@ -137,9 +137,7 @@ function express_app(db) {  // export as function so that it can receive any spe
 
         // Ensure the input fields exists and are not empty
 	    if (username && password) {
-            response.status(201).send({
-                status: "Successfully obtained username and password"
-            })
+            response.status(201);
             console.log("Successfully obtained username and password");
 		    db.authUser(username, password, request, response);
         } else {

@@ -93,7 +93,7 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, credit, 
                 connection.query(
                     `INSERT INTO ReservationInfo (userid, name, phonenum, email, guestnum, datetime, credit) 
                     VALUES((SELECT userid FROM UserCredentials WHERE username = '${username}'), 
-                    '${name}','${phoneNum}', '${email}', '${guests}','${datetime}', '${credit})`
+                    '${name}','${phoneNum}', '${email}', '${guests}','${datetime}', '${credit}')`
                 );
                 reserved = true;
                 response.status(201).send({

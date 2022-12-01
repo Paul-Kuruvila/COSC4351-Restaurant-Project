@@ -158,14 +158,14 @@ const Reserve = () => {
 						<button className='Submit' type='submit'>Submit</button> 
 					</li>
 					<li>
-						<ul className={hightraffic ? "show" : "hide"}>
+						{/* <ul className={hightraffic ? "show" : "hide"}>
 							<label className= "labels"> High traffic days required a valid credit card. Please enter your credit card information.</label>
 							<input className='inputbox' type='text' title='Please enter your credit card information.' required placeholder='Enter your credit card information.'
 							onChange = {(e) => setCredit(e.target.value)}
 							onKeyPress = {(e) => requireNums(e)}
 							value = {credit}
 							/>
-						</ul>
+						</ul> */}
                 	</li>
 				</ul>
 				<ul className={suggestRegister ? 'information-boxes' : 'hide'}>
