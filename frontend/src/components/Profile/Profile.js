@@ -1,5 +1,5 @@
-//import './Profile.css';
-import React, {useEffect, useState} from 'react';
+import './Profile.css'
+import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 
 //html/validation/etc. handled by Paul; http requests handled by Eric ; button handler for testing by David
@@ -97,7 +97,11 @@ const Profile = ({label}) => {
 
     const handleSubmit = async(e) => { //sending data to backend
         e.preventDefault();
+<<<<<<< HEAD
         //state = document.getElementById('payment').value; //was state before
+=======
+        payment = document.getElementById('payment').value; //was state before
+>>>>>>> 233665bd146e6ee0f1d29f85d250b67a1472bd14
         const profileData = {name, mailaddress, billaddress, diner, payment};
         
         const options = {
@@ -120,11 +124,11 @@ const Profile = ({label}) => {
     }
 
     return (
-      <div className="profile">
-          <h1>Profile</h1>
+      <div className="Login">
           <form onSubmit = {handleSubmit}>
-            <ul className="signup-boxes">
-                <li>
+            <ul className="information-boxes">
+                <label className='container-title'>Profile</label>
+                <li className='guest-info'>
                     <label className="">Full Name</label>
                     <input className="inputbox" id="name" type="text" minLength="2" maxLength="50" required placeholder="Enter your first and last name."
                     value = {name}
@@ -134,8 +138,8 @@ const Profile = ({label}) => {
                     readOnly="readonly"
                     />
                 </li>
-                <li>
-                    <label>Address 1</label>
+                <li className='guest-info'>
+                    <label>Mailing Address</label>
                     <input className="inputbox" id="address" type="text" minLength="2" maxLength="100"  required placeholder="Enter your mailing address."
                     value = {mailaddress}
                     onChange = {(e) => setMailAddress(e.target.value)}
@@ -143,24 +147,25 @@ const Profile = ({label}) => {
                     readOnly="readonly"
                     />
                 </li>
-                <li>
-                    <label>Address 2</label>
+                <li className='guest-info'>
+                    <label>Billing Address</label>
                     <input className="inputbox" id="address2" type="text" maxLength="100" placeholder="Enter your billing address, if applicable."
                     value = {billaddress}
                     onChange = {(e) => setBillAddress(e.target.value)}
                     readOnly="readonly"
                     />
                 </li>
-                <li>
+                <li className='guest-info'>
                     <label>Diner</label>
                     <input className="inputbox" id="diner#" type="text" minLength="2" maxLength="100" required placeholder="Enter your preferred diner number."
                     value = {diner}
                     onChange = {(e) => setDiner(e.target.value)}
+                    onKeyPress = {(e) => requireNums(e)}
                     onSelect = {(e) => checkEmpty(e)}
                     readOnly="readonly"
                     />
                 </li>
-                <li>
+                <li className='guest-info'>
                     <label>Payment</label>
                     <select className="inputbox" id="payments" name="state" defaultValue={""} value={payment} onChange = {(e) => setPayment(e.target.value)} disabled={true}>
                         <option value="">Select a payment method</option>
@@ -177,12 +182,13 @@ const Profile = ({label}) => {
                         <button data-testid="Submit"  className="Submit" type="submit" onClick={() => checkFields()}>Save{label}</button>
                     </div>
                 </li>
-            </ul>
-            <div id="fuelquote" className = "submitbutton">
+                <div id="fuelquote" className = "submitbutton">
                 <a href="\fuelquoteform">
-                    <button data-testid="button" className="Submit" type="button">Fuel Quote</button>
+                    <button data-testid="button" className="Submit" type="button">Reserve a Table</button>
                 </a>
             </div>
+            </ul>
+            
         </form>
         
       </div>

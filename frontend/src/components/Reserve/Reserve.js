@@ -60,7 +60,7 @@ const Reserve = () => {
 		console.log(date);
 
 		if (date.getDay() === 6 || date.getDay() === 0 || date.slice(5,11) == "06-04" || date.slice(5,11) == "12-25") {
-			
+			setCredit()
 		}
 	}
 
@@ -144,6 +144,7 @@ const Reserve = () => {
 					<li>
 						<button className='Submit' type='submit'>Submit</button> 
 					</li>
+					
 				</ul>
 				<ul className={suggestRegister ? 'information-boxes' : 'hide'}>
 					<label className='container-title2'>HEY, WE NOTICED YOU AREN'T LOGGED IN!</label>

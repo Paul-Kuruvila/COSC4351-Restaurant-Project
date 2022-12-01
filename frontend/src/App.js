@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import Reserve from './components/Reserve/Reserve';
 import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
+
 const App = () => {
     return (
         <Router>
@@ -18,6 +19,7 @@ const App = () => {
                         <Route path = '/profile' element={<Profile />} />
                         <Route path = '/reserve' element={<Reserve />} />
                         <Route path = '/register' element={<Register />} />
+                        <Route path = '/profile' element={<Profile />} />
                     </Routes>
                 </div>
             </div>

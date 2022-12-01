@@ -7,7 +7,7 @@
     margin-bottom: 1.5rem;
 }
 
-.guest-info input, #DT {
+.guest-info input, .guest-info select, #DT {
     display: inline-block;
     margin-left: 0.5rem;
     background-color: rgba(110, 110, 0, 0.5);

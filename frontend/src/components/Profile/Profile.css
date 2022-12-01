@@ -1,0 +1,11 @@
+#edit {
+  cursor: pointer;
+  color: rgb(0, 105, 135);
+  margin-bottom: 1rem;
+}
+
+#edit:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgb(0, 105, 30);
+}

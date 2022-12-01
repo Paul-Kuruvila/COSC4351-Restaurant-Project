@@ -83,51 +83,54 @@ function authUser(username, password, request, response) {
 }
 
 function reserveUser(username, name, email, phoneNum, guests, credit, datetime, request, response) {
-    try {
-        // encrypt password using SHA2-256 hash function
-        connection.promise().query(`INSERT INTO ReservationInfo (name, phonenum, email, guestnum, datetime, credit) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${datetime}', '${credit}')`);
-        console.log('Info Reserved. (BACKEND)');
-    }
-    catch(err) {
-        console.log(err);
-        console.log('Unexpected error occurred.');
-    }
+    connection.query(`INSERT INTO ReservationInfo (name, phonenum, email, guestnum, datetime, credit) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${datetime}', '${credit}')`, function(error, results, fields) {
+        if(error) throw error;
+        try {
+            response.status(201).send({
+                status: 'Info Reserved. (BACKEND)'
+            });
+            console.log('Info Reserved. (BACKEND)');
+            
+            
+        }
+        catch(error) {
+            response.status(401).send({
+                status: 'Info failed to reserve. (FROM BACKEND)',
+            });
+            console.log(error);
+            console.log('Unexpected error occurred.');
+        }
+        response.end();
+    });
 
 }
-
-function specialDays(username, request, response){
-    let name = request.body.name;
-    let phonenum = request.body.phonenum;
-    let email = request.body.email;
-    let guests = request.body.guests;
-
-    try{
-        connection.query(`SELECT datetime FROM ReservationInfo WHERE userid = (SELECT userid FROM UserCredentials WHERE username = '${username}')`, (err, results) => { 
-            //if (err) throw err;
-            /*if (results[0].datetime.getDay() === 6 || results[0].datetime.getDay() === 0) {
-
-            }*/
-            console.log("hello");
-            console.log(results[0].datetime);
-
-            //savedInfo = true;
-        })     
-        response.send({
-            status: 'Successfully logged in. (FROM BACKEND)',
-            login,
-            username
-        });       
-    }
-    catch(err){
-        console.log(err);
-        console.log("Fuel cost could not be updated.");
-    }
+ 
+function saveProfile(username, name, email, billaddress, diner, payment, request, response) {
+    connection.query(`INSERT INTO ProfileInfo (name, phonenum, email, billaddress, diner, payment) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${billaddress}', '${diner}', '${payment}')`, function(error, results, fields) {
+        if(error) throw error;
+        try {
+            response.status(201).send({
+                status: 'Profile info saved. (BACKEND)'
+            });
+            console.log('Profile info saved. (BACKEND)');
+            
+            
+        }
+        catch(error) {
+            response.status(401).send({
+                status: 'Profile info failed to save. (FROM BACKEND)',
+            });
+            console.log(error);
+            console.log('Unexpected error occurred.');
+        }
+        response.end();
+    });
 }
 // Add reserveTable, etc. functions
 
 module.exports = {
     registerUser,
     authUser,
-    specialDays,
-    reserveUser
+    reserveUser,
+    saveProfile
 }
