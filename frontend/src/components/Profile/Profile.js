@@ -97,11 +97,7 @@ const Profile = ({label}) => {
 
     const handleSubmit = async(e) => { //sending data to backend
         e.preventDefault();
-<<<<<<< HEAD
-        //state = document.getElementById('payment').value; //was state before
-=======
         payment = document.getElementById('payment').value; //was state before
->>>>>>> 233665bd146e6ee0f1d29f85d250b67a1472bd14
         const profileData = {name, mailaddress, billaddress, diner, payment};
         
         const options = {
