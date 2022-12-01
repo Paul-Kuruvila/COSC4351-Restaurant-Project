@@ -145,7 +145,6 @@ function express_app(db) {  // export as function so that it can receive any spe
             console.log("Please enter Username and Password! (BACKEND)");
             response.end();
         }
-        response.end();
     });
     
     return app;
