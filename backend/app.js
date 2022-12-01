@@ -74,12 +74,13 @@ function express_app(db) {  // export as function so that it can receive any spe
         let guests = request.body.guests;
         //let credit = request.body.credit;
         let datetime = request.body.datetime;
+        let credit = request.body.credit;
 
     
         console.log(`Attempting to reserve ${username}...`);
 
         //db.reserveUser(username, name, email, phoneNum, guests, credit, datetime, request, response);
-        db.reserveUser(username, name, email, phoneNum, guests, datetime, request, response);
+        db.reserveUser(username, name, email, phoneNum, guests, datetime, credit, request, response);
         
     });
 
@@ -136,6 +137,9 @@ function express_app(db) {  // export as function so that it can receive any spe
 
         // Ensure the input fields exists and are not empty
 	    if (username && password) {
+            response.status(201).send({
+                status: "Successfully obtained username and password"
+            })
             console.log("Successfully obtained username and password");
 		    db.authUser(username, password, request, response);
         } else {

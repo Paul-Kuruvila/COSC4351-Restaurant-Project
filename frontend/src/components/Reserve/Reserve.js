@@ -18,7 +18,7 @@ const Reserve = () => {
 		const response = await fetch('/profiledata')
 		const jsonData = await response.json();
 		return(jsonData)
-	  }
+	}
 	document.addEventListener("DOMContentLoaded", async () => { //set variables for visual rendering on page load
 		let data = [];
 		try {
@@ -27,6 +27,7 @@ const Reserve = () => {
 			setName(data.name);
 			if(data.phonenum !== "undefined")
 				setPhoneNum(data.phonenum);
+			setCredit(credit);
 			//setEmail(data.email);
 		} catch (e) {
 			console.log("Error fetching profile data from backend");

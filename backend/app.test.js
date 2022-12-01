@@ -85,6 +85,7 @@ describe("Unit Tests", () => {
         expect(authUser.mock.calls.length).toBe(1);
         expect(authUser.mock.calls[0][0]).toBe('test');
         expect(authUser.mock.calls[0][1]).toBe('123123');
+        expect(res.body.status).toEqual("Successfully obtained username and password");
     })
 
     it('POST /logout should successfully log user out', async () => {

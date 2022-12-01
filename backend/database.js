@@ -76,7 +76,7 @@ function authUser(username, password, request, response) {
     });
 }
 
-function reserveUser(username, name, email, phoneNum, guests, datetime, request, response) { //removed credit for now
+function reserveUser(username, name, email, phoneNum, guests, datetime, credit, request, response) { //removed credit for now
     let login = request.session.loggedin;
     let reserved = false;
 
@@ -91,9 +91,9 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, request,
         else{
             try {
                 connection.query(
-                    `INSERT INTO ReservationInfo (userid, name, phonenum, email, guestnum, datetime) 
+                    `INSERT INTO ReservationInfo (userid, name, phonenum, email, guestnum, datetime, credit) 
                     VALUES((SELECT userid FROM UserCredentials WHERE username = '${username}'), 
-                    '${name}','${phoneNum}', '${email}', '${guests}','${datetime}')`
+                    '${name}','${phoneNum}', '${email}', '${guests}','${datetime}', '${credit})`
                 );
                 reserved = true;
                 response.status(201).send({
