@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Reserve.css';
 
 const Reserve = () => {
+	const navigate = useNavigate();
 	//number of guests and date n time 
 	const [name, setName] = useState();
 	const [datetime, setDateTime] = useState();
@@ -12,6 +13,27 @@ const Reserve = () => {
 	const [email, setEmail] = useState();
 	const [guests, setGuests] = useState();
 	const [suggestRegister, setSuggestRegister] = useState(false);
+
+	const profileData = async () => { //retrieving profile data from backend which is retrieved from database
+		const response = await fetch('/profiledata')
+		const jsonData = await response.json();
+		return(jsonData)
+	  }
+	document.addEventListener("DOMContentLoaded", async () => { //set variables for visual rendering on page load
+		let data = [];
+		try {
+			data = await profileData();
+			setName(data.name);
+			setDateTime(data.datetime);
+			setPhoneNum(data.phoneNum);
+			setEmail(data.email);
+			setGuests(data.guests);
+		} catch (e) {
+			console.log("Error fetching profile data from backend");
+			//console.log(e);
+		}
+		console.log(data);
+	})
 
 	useEffect(() => {
 		const checkLoginStatus = async () => {
@@ -28,7 +50,7 @@ const Reserve = () => {
 			.catch(console.error);
 	}, [])
 
-	const navigate = useNavigate();
+	
 
 	//console.log(datetime);
 	const specialDays = async(e) => {

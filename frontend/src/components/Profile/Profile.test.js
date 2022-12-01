@@ -50,7 +50,10 @@ describe("Test Profile form", () => {
         expect(button).toHaveLength(2);
     });
     test('Save button properly saves information', async  () => {
-        const {getByTestId} = render(<Profile label = "Save"></Profile>)
+        const {getByTestId} = render(
+        <BrowserRouter>
+            <Profile label = "Save"></Profile>
+        </BrowserRouter>)
         expect(getByTestId("Submit")).toHaveTextContent("Save")
     });
 

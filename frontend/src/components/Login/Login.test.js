@@ -43,7 +43,10 @@ describe("Test login form", () => {
         expect(button).toHaveLength(1);
     });
     test('Login button displays properly', async  () => {
-        const {getByTestId} = render(<Login label = "Login"></Login>)
+        const {getByTestId} = render(
+        <BrowserRouter>
+            <Login label = "Login"></Login>
+        </BrowserRouter>)
         expect(getByTestId("button")).toHaveTextContent("Login")
     });
 

@@ -5,7 +5,7 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Reserve from './components/Reserve/Reserve';
 import Register from './components/Register/Register';
-
+import Profile from './components/Profile/Profile';
 const App = () => {
     return (
         <Router>
@@ -15,6 +15,7 @@ const App = () => {
                     <Routes>
                         <Route exact path = '/' element={<Home />} />
                         <Route path = '/login' element={<Login />} />
+                        <Route path = '/profile' element={<Profile />} />
                         <Route path = '/reserve' element={<Reserve />} />
                         <Route path = '/register' element={<Register />} />
                     </Routes>

@@ -40,7 +40,7 @@ describe("Test Navbar form", () => {
             <Navbar/>
         </BrowserRouter>);
         const text = screen.getByTestId("text"); 
-        expect(text).toHaveTextContent("Fuel.io"); 
+        expect(text).toHaveTextContent("Seat Yourself!"); 
     });
     
 });

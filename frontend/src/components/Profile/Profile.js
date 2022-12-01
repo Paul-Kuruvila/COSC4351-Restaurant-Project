@@ -1,4 +1,4 @@
-import './Profile.css';
+//import './Profile.css';
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 
@@ -97,7 +97,7 @@ const Profile = ({label}) => {
 
     const handleSubmit = async(e) => { //sending data to backend
         e.preventDefault();
-        state = document.getElementById('payment').value; //was state before
+        //state = document.getElementById('payment').value; //was state before
         const profileData = {name, mailaddress, billaddress, diner, payment};
         
         const options = {

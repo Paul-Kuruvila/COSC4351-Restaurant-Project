@@ -38,7 +38,7 @@ describe("Unit Tests", () => {
     })
     
     afterAll(() => {
-        database.connection.close();
+        //database.connection.close();
     })
 
     it('GET /', async () => {
@@ -57,14 +57,17 @@ describe("Unit Tests", () => {
     })
 
     it('POST /register should successfully register new users', async () => {
-        const res = await requestWithSupertest.post('/register')
-        .send({     // sending in test parameters to mock database
+        const res = await requestWithSupertest.post('/register').send({     // sending in test parameters to mock database
             username: 'test',
             password: '123123',
+            email: 't@fakemail.com',
+            phoneNum: '1234567890'
         });
         expect(registerUser.mock.calls.length).toBe(1);
         expect(registerUser.mock.calls[0][0]).toBe('test');
         expect(registerUser.mock.calls[0][1]).toBe('123123');
+        expect(registerUser.mock.calls[0][2]).toBe('t@fakemail.com');
+        expect(registerUser.mock.calls[0][3]).toBe('1234567890');
         expect(res.body.status).toEqual('Registered user. (FROM BACKEND)');
     })
 
@@ -74,8 +77,7 @@ describe("Unit Tests", () => {
     })
 
     it('POST /auth should successfully login for valid username and password', async () => {
-        const res = await requestWithSupertest.post('/auth')
-        .send({     // sending in test parameters to receive an unsuccessful response due to internal server error
+        const res = await requestWithSupertest.post('/auth').send({     // sending in test parameters to receive an unsuccessful response due to internal server error
             username: 'test',
             password: '123123',
         });
