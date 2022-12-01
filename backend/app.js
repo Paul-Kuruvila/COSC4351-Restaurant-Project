@@ -138,9 +138,6 @@ function express_app(db) {  // export as function so that it can receive any spe
 	    if (username && password) {
             console.log("Successfully obtained username and password");
 		    db.authUser(username, password, request, response);
-            response.send({
-                status: 'Successfully obtained username and password (FROM BACKEND)'
-            })
         } else {
             response.status(401).send({
                 status: 'Please enter Username and Password! (FROM BACKEND)'
@@ -148,6 +145,7 @@ function express_app(db) {  // export as function so that it can receive any spe
             console.log("Please enter Username and Password! (BACKEND)");
             response.end();
         }
+        response.end();
     });
     
     return app;

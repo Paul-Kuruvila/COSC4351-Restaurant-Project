@@ -60,6 +60,11 @@ function authUser(username, password, request, response) {
             request.session.username = username;
             login = request.session.loggedin;
             SID = request.sessionID;
+            response.send({
+                status: 'Successfully logged in. (FROM BACKEND)',
+                login,
+                username
+            });
             console.log("Successfully logged in.");
             console.log(`Welcome back, ${request.session.username}!`);
         } else {
@@ -67,8 +72,7 @@ function authUser(username, password, request, response) {
                 status: 'Incorrect Username and/or Password! (FROM BACKEND)',
             });
             console.log("Incorrect Username and/or Password! (BACKEND)");
-        }			
-        response.end();
+        }
     });
 }
 
@@ -157,7 +161,7 @@ function saveProfile(username, name, email, phoneNum, billaddress, diner, paymen
     }
 }
 
-//connection.end();
+// connection.end();
 
 module.exports = {
     registerUser,
