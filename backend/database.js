@@ -118,7 +118,7 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, request,
 }
  
 function saveProfile(username, name, email, billaddress, diner, payment, request, response) {
-    connection.query(`INSERT INTO ProfileInfo (name, phonenum, email, billaddress, diner, payment) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${billaddress}', '${diner}', '${payment}')`, function(error, results, fields) {
+    connection.query(`INSERT INTO ProfileInfo (name, phonenum, email, billaddress, diner, payment) VALUES('${name}','${phoneNum}', '${email}','${billaddress}', '${diner}', '${payment}')`, function(error, results, fields) {
         if(error) throw error;
         try {
             response.status(201).send({

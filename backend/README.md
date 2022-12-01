@@ -29,4 +29,4 @@
 +----------+--------------+------+-----+---------+-------+
 ```
 
-create table ProfileInfo(name VARCHAR(255) NOT NULL, email VARCHAR(255), billaddress VARCHAR(255), diner INT NOT NULL)
+create table ProfileInfo(name VARCHAR(255) NOT NULL, email VARCHAR(255), billaddress VARCHAR(255), diner INT NOT NULL, payment VARCHAR(255))

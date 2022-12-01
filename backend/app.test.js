@@ -1,5 +1,6 @@
 createApp = require('./app.js');
 database = require('./database.js');
+const supertest = require('supertest');
 
 const registerUser = jest.fn();
 const authUser = jest.fn();
@@ -19,7 +20,7 @@ const app = createApp({
     getFuelQuoteHistory
 })
 
-const supertest = require('supertest');
+
 const requestWithSupertest = supertest(app);
 
 //testing setup by David, Paul, and Eric
