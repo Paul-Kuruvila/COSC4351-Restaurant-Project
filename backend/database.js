@@ -83,6 +83,7 @@ function authUser(username, password, request, response) {
 }
 
 function reserveUser(username, name, email, phoneNum, guests, datetime, request, response) { //removed credit for now
+    let login = request.session.loggedin;
     let reserved = false;
 
     connection.query(`SELECT * FROM ReservationInfo WHERE phonenum = '${phoneNum}'`, function(error, results, fields) {
@@ -100,7 +101,8 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, request,
                 reserved = true;
                 response.status(201).send({
                     status: 'Info Reserved. (BACKEND)',
-                    reserved
+                    reserved,
+                    login
                 });
                 console.log('Info Reserved. (BACKEND)');
             }
@@ -118,25 +120,47 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, request,
 }
  
 function saveProfile(username, name, email, billaddress, diner, payment, request, response) {
-    connection.query(`INSERT INTO ProfileInfo (name, phonenum, email, billaddress, diner, payment) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${billaddress}', '${diner}', '${payment}')`, function(error, results, fields) {
-        if(error) throw error;
-        try {
-            response.status(201).send({
-                status: 'Profile info saved. (BACKEND)'
-            });
-            console.log('Profile info saved. (BACKEND)');
+    let login = request.session.loggedin;
+    let savedInfo = false;
+
+    try {
+        connection.promise().query(
+            `INSERT INTO ProfileInfo (userid, name, phonenum, email, billaddress, diner, payment)  
+            VALUES((SELECT userid FROM UserCredentials WHERE username = '${username}'), 
+            '${name}','${phoneNum}', '${email}', '${billaddress}', '${diner}', '${payment}') ON DUPLICATE KEY
+            UPDATE name='${name}', phone='${phoneNum}', email='${email}', billaddress='${billaddress}', diner='${diner}', payment='${payment}'`
+        );
+        savedInfo = true;
+        //testprof(savedInfo);
+        response.status(201).send({
+            status: 'Information saved.', 
+            login,
+            savedInfo
+        });
+        console.log("Information saved.");
+    }
+    catch(err){
+        console.log(err);
+        console.log("Information was not saved.");
+    }
+    // //connection.query(`INSERT INTO ProfileInfo (name, phonenum, email, billaddress, diner, payment) VALUES('${name}','${phoneNum}', '${email}','${billaddress}', '${diner}', '${payment}')`, function(error, results, fields) {
+    //     if(error) throw error;
+    //     try {
+    //         response.status(201).send({
+    //             status: 'Profile info saved. (BACKEND)'
+    //         });
+    //         console.log('Profile info saved. (BACKEND)');
             
             
-        }
-        catch(error) {
-            response.status(401).send({
-                status: 'Profile info failed to save. (FROM BACKEND)',
-            });
-            console.log(error);
-            console.log('Unexpected error occurred.');
-        }
-        response.end();
-    });
+    //     }
+    //     catch(error) {
+    //         response.status(401).send({
+    //             status: 'Profile info failed to save. (FROM BACKEND)',
+    //         });
+    //         console.log(error);
+    //         console.log('Unexpected error occurred.');
+    //     }
+    response.end();
 }
 // Add reserveTable, etc. functions
 
