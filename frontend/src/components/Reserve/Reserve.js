@@ -60,7 +60,7 @@ const Reserve = () => {
 		console.log(date);
 
 		if (date.getDay() === 6 || date.getDay() === 0 || date.slice(5,11) == "06-04" || date.slice(5,11) == "12-25") {
-			setCredit()
+			hightraffic = true;
 		}
 	}
 
@@ -153,6 +153,10 @@ const Reserve = () => {
 					<li>
 						<button className='Submit' type='submit'>Submit</button> 
 					</li>
+					<li>
+                    	<label className={hightraffic ? "hide" : "showInvalid"}>{hightraffic ? <p>High traffic days required a valid credit card.<br/>Please enter your credit card information.</p> : 'May require credit card information on a high traffic day.'}</label>
+                	</li>
+					
 					
 				</ul>
 				<ul className={suggestRegister ? 'information-boxes' : 'hide'}>
