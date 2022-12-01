@@ -25,6 +25,7 @@ const Reserve = () => {
 			data = await profileData();
 			console.log(data);
 			setName(data.name);
+			setEmail(data.email);
 			if(data.phonenum !== "undefined")
 				setPhoneNum(data.phonenum);
 			setCredit(credit);
