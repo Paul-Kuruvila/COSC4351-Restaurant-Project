@@ -111,8 +111,27 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, request,
         
     });
 }
+
+function getProfile(username, request, response){
+    if (request.session.loggedin || request.body.loggedin === 'yes') { // request.body.loggedin will never evaluate to 'yes' aside from testing purposes
+        console.log(`Attempting to retrieve stored information for ${username}...`);
+        connection.query(`SELECT name, email, billaddress, diner, payment FROM ProfileInfo WHERE (SELECT userid FROM UserCredentials WHERE username = '${username}') = ProfileInfo.userid`, (err, results) => {
+            if (err) throw err;
+
+            var data;
+            data = results[0];
+            response.send(data);
+            console.log(data);
+        });
+    } else {
+        response.status(401).send({
+            status: "Please login to view this page! (FROM BACKEND)"
+        })
+        console.log("Please login to view this page!");
+    }
+}
  
-function saveProfile(username, name, email, billaddress, diner, payment, request, response) {
+function saveProfile(username, name, email, phoneNum, billaddress, diner, payment, request, response) {
     let login = request.session.loggedin;
     let savedInfo = false;
 
@@ -121,7 +140,7 @@ function saveProfile(username, name, email, billaddress, diner, payment, request
             `INSERT INTO ProfileInfo (userid, name, phonenum, email, billaddress, diner, payment)  
             VALUES((SELECT userid FROM UserCredentials WHERE username = '${username}'), 
             '${name}','${phoneNum}', '${email}', '${billaddress}', '${diner}', '${payment}') ON DUPLICATE KEY
-            UPDATE name='${name}', phone='${phoneNum}', email='${email}', billaddress='${billaddress}', diner='${diner}', payment='${payment}'`
+            UPDATE name='${name}', phonenum='${phoneNum}', email='${email}', billaddress='${billaddress}', diner='${diner}', payment='${payment}'`
         );
         savedInfo = true;
         //testprof(savedInfo);
@@ -136,32 +155,14 @@ function saveProfile(username, name, email, billaddress, diner, payment, request
         console.log(err);
         console.log("Information was not saved.");
     }
-    // //connection.query(`INSERT INTO ProfileInfo (name, phonenum, email, billaddress, diner, payment) VALUES('${name}','${phoneNum}', '${email}','${billaddress}', '${diner}', '${payment}')`, function(error, results, fields) {
-    //     if(error) throw error;
-    //     try {
-    //         response.status(201).send({
-    //             status: 'Profile info saved. (BACKEND)'
-    //         });
-    //         console.log('Profile info saved. (BACKEND)');
-            
-            
-    //     }
-    //     catch(error) {
-    //         response.status(401).send({
-    //             status: 'Profile info failed to save. (FROM BACKEND)',
-    //         });
-    //         console.log(error);
-    //         console.log('Unexpected error occurred.');
-    //     }
-    response.end();
 }
-// Add reserveTable, etc. functions
 
-//connection.end();
+connection.end();
 
 module.exports = {
     registerUser,
     authUser,
     reserveUser,
-    saveProfile
+    saveProfile,
+    getProfile
 }

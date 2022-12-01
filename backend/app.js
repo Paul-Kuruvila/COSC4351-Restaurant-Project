@@ -83,23 +83,50 @@ function express_app(db) {  // export as function so that it can receive any spe
         
     });
 
+    app.get('/profiledata', function(request, response) {//receiving profile data to output in the front end //done by Paul
+        let username = request.session.username;
+        if(username == undefined)   username = request.body.username; // request.body.username will always be undefined aside for testing purposes
+        console.log(`Username is ${username}`);
+        if(username == undefined && request.body.username == undefined){ //
+            response.status(400).send({
+                status: "Could not fetch profile data (FROM BACKEND)"
+            })
+        } else {
+            db.getProfile(username, request, response);
+            if(request.session.username == undefined) {
+                response.send({ status: "Successfully fetched profile data (FROM BACKEND)" })   // if we are currently mocking database and testing
+            }
+        }
+    })
+
     app.post('/profile', function(request, response) {
         let username = request.session.username;
+        if(username == undefined)   username = request.body.username; // request.body.username will always be undefined aside for testing purposes
         let name = request.body.name;
-        let email = request.body.mailaddress;
+        let email = request.body.email;
         let billaddress = request.body.billaddress;
         let diner = request.body.diner;
         let payment = request.body.payment;
+        let phoneNum = request.body.phoneNum;
 
+        console.log(`The things that were received are as follows: username=${username}, name=${name}, email=${email}, phoneNum=${phoneNum}, billaddress=${billaddress}, diner=${diner}, and payment=${payment}`)
     
         console.log(`Attempting to save profile ${username}...`);
 
-        db.saveProfile(username, name, email, billaddress, diner, payment, request, response);
-
-        
+        if (request.session.loggedin || request.body.loggedin === 'yes') {
+            db.saveProfile(username, name, email, phoneNum, billaddress, diner, payment, request, response);
+            if(request.body.loggedin === 'yes'){ // request.body.loggedin will never evaluate to 'yes' aside from testing purposes
+                response.status(201).send({
+                    status: "Successfully updated profile. (FROM BACKEND)"
+                })
+            } 
+        } else {
+            response.status(401).send({
+                status: "Please login to view this page! (FROM BACKEND)"
+            })
+            console.log("Please login to view this page!");
+        }
     });
-
-
 
 
     app.post('/auth', function(request, response) { //authenticating user logins //done by Eric
