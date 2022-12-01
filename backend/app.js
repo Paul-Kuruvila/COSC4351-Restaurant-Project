@@ -52,10 +52,11 @@ function express_app(db) {  // export as function so that it can receive any spe
 
         if(username && password) {
             console.log(`Attempting to register user ${username}...`);
-            db.registerUser(username, password, email, phoneNum, request, response);
-            // response.send({
-            //     status: 'Registered user. (BACKEND)'
-            // });
+            let registerStatus = db.registerUser(username, password, email, phoneNum, request, response);
+            response.status(201).send({
+                status: 'Registered user. (FROM BACKEND)',
+                registerStatus
+            });
         } else {
             response.status(400).send({
                 status: 'Please enter username and password! (FROM BACKEND)'
@@ -110,9 +111,9 @@ function express_app(db) {  // export as function so that it can receive any spe
 	    if (username && password) {
             console.log("Successfully obtained username and password");
 		    db.authUser(username, password, request, response);
-            // response.send({              // Causing this error: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
-            //     status: 'Successfully obtained username and password (FROM BACKEND)'
-            // })
+            response.send({
+                status: 'Successfully obtained username and password (FROM BACKEND)'
+            })
         } else {
             response.status(401).send({
                 status: 'Please enter Username and Password! (FROM BACKEND)'

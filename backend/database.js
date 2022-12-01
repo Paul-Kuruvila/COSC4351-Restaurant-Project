@@ -27,10 +27,6 @@ function registerUser(username, password, email, phoneNum, request, response) { 
                 // encrypt password using SHA2-256 hash function
                 connection.promise().query(`INSERT INTO UserCredentials (username, password, phonenum, email) VALUES('${username}', SHA2('${password}', 256), '${phoneNum}', '${email}')`);
                 registered = true;
-                response.status(201).send({
-                    status: 'Account created. (BACKEND)',
-                    registered
-                });
                 console.log('Account created. (BACKEND)');
             }
             catch(err) {
@@ -38,7 +34,7 @@ function registerUser(username, password, email, phoneNum, request, response) { 
                 console.log('Unexpected error occurred.');
             }
         }
-        response.end();
+        return registered;
     });
 }
 
@@ -64,14 +60,8 @@ function authUser(username, password, request, response) {
             request.session.username = username;
             login = request.session.loggedin;
             SID = request.sessionID;
-            response.send({
-                status: 'Successfully logged in. (FROM BACKEND)',
-                login,
-                username
-            });
             console.log("Successfully logged in.");
             console.log(`Welcome back, ${request.session.username}!`);
-            response.end();
         } else {
             response.status(401).send({
                 status: 'Incorrect Username and/or Password! (FROM BACKEND)',
@@ -166,6 +156,8 @@ function saveProfile(username, name, email, billaddress, diner, payment, request
     response.end();
 }
 // Add reserveTable, etc. functions
+
+//connection.end();
 
 module.exports = {
     registerUser,
