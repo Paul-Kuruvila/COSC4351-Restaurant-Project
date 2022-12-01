@@ -86,6 +86,7 @@ const Profile = ({label}) => {
             if(data.fullname !== "undefined"){
                 setName(data.name);
                 setEmail(data.email);
+                setPhoneNum(data.phonenum);
                 if(data.billaddress !== "undefined")
                     setBillAddress(data.billaddress);
                 setDiner(data.diner);
@@ -142,6 +143,7 @@ const Profile = ({label}) => {
                     <li className='guest-info'>
                         <label className='Label'>Phone Number:</label>
                         <input className='inputbox' type='text' title='Please enter your phone number.' minLength="10" maxLength="10" required placeholder='Enter your phone number.'
+                        value = {phoneNum}
                         onChange = {(e) => setPhoneNum(e.target.value)}
                         />
                     </li>
