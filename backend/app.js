@@ -66,7 +66,7 @@ function express_app(db) {  // export as function so that it can receive any spe
     });
 
     app.post('/reserve', function(request, response) {
-        let username = request.body.username;
+        let username = request.session.username;
         let name = request.body.name;
         let email = request.body.email;
         let phoneNum = request.body.phoneNum;
@@ -83,7 +83,7 @@ function express_app(db) {  // export as function so that it can receive any spe
     });
 
     app.post('/profile', function(request, response) {
-        let username = request.body.username;
+        let username = request.session.username;
         let name = request.body.name;
         let email = request.body.mailaddress;
         let billaddress = request.body.billaddress;

@@ -95,9 +95,12 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, request,
             console.log('There is already a reservation under this phone number! (BACKEND)');
         }
         else{
-           
             try {
-                connection.query(`INSERT INTO ReservationInfo (name, phonenum, email, guestnum, datetime) VALUES('${name}','${phoneNum}', '${email}', '${guests}','${datetime}')`);
+                connection.query(
+                    `INSERT INTO ReservationInfo (userid, name, phonenum, email, guestnum, datetime) 
+                    VALUES((SELECT userid FROM UserCredentials WHERE username = '${username}'), 
+                    '${name}','${phoneNum}', '${email}', '${guests}','${datetime}')`
+                );
                 reserved = true;
                 response.status(201).send({
                     status: 'Info Reserved. (BACKEND)',
