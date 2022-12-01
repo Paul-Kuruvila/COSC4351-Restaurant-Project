@@ -41,7 +41,10 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <button data-testid="button" className='ReserveButton' onClick ={() => navigate('/reserve')}>RESERVE SEATING HERE!</button>
+      <button data-testid="button" className='ReserveButton' onClick={() => { 
+          navigate('/reserve');
+          document.location.reload('true'); 
+        }}>RESERVE SEATING HERE!</button>
     </div>
   );
 }

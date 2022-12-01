@@ -184,9 +184,10 @@ const Profile = ({label}) => {
                     </div>
                 </li>
                 <div id="fuelquote" className = "submitbutton">
-                <a href="\fuelquoteform">
-                    <button data-testid="button" className="Submit" type="button">Reserve a Table</button>
-                </a>
+                <button data-testid="button" className="Submit" style={{height:'60px'}} type="button" onClick={() => { 
+                    navigate('/reserve');
+                    document.location.reload('true'); 
+                }}>Reserve a Table</button>
             </div>
             </ul>
             
