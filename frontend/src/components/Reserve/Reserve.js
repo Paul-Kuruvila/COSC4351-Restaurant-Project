@@ -76,11 +76,16 @@ const Reserve = () => {
 
 		const response = await fetch('/reserve', options);
 		const jsonData = await response.json();
-		if (jsonData.reserved) { //if registration is successful
+		
+		//The jsonData has a status that is returned to let us know if the reservation was successful or failed, and why it failed.
+		if (jsonData.reserved && !jsonData.login) { //if reservation is successful and not logged in
 			console.log(jsonData);
-			navigate('/register') //redirect to login page
-		} else {
+			navigate('/register') //redirect to registration page and notify of successful registration
+		} else if (jsonData.reserved) { //if reservation was successful and logged in
 			console.log(jsonData);
+			//navigate('success') //redirect to successful reservation OR we can simply do the container box text that pops up
+		} else { //If the reservation failed.
+			console.log(jsonData) //i.e.: there is already a reservation under the number; Info failed to reserve. (FROM BACKEND)
 		}
 	}
 

@@ -31,7 +31,7 @@ const Register = () => {
       <form onSubmit = {handleSubmit}>
         <ul className="information-boxes">
           <label className='container-title'>REGISTER</label>
-          <p className='container-description'>We're so excited you'll be joining us!<br />Please enter your desired credentials.</p>
+          <p className='container-description'>Your reservation has been successful and we're so excited you'll be joining us!<br />Please consider registering with us for a faster reservation process!<br />Note that a there will be a $10 no-show fee if we are not notified of a cancellation 24 hours in advance. </p>
           <ul className='boxes-container'>
             <li className='guest-info'>
               <label className='Label'>Username:</label>
