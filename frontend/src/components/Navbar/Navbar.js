@@ -49,7 +49,10 @@ const Navbar = () => {
       <div className='Login-Options'>
         <p className={LoginStatus ? 'hide' : ''}>Need to create an account?<br/><a href='/register' rel='noopener noreferrer'>Sign up here.</a></p>
         <button className={LoginStatus ? 'hide' : ''} onClick={() => navigate('/login')}>Login</button>
-        <p onClick={() => navigate('/profile')} className={LoginStatus ? 'profile-button' : 'hide'}>View Profile</p>
+        <p className={LoginStatus ? 'profile-button' : 'hide'} onClick={() => { 
+          navigate('/profile');
+          document.location.reload('true'); 
+        }}>View Profile</p>
         <button className={LoginStatus ? '' : 'hide'} onClick={() => logoutHandler()}>Sign out</button>
       </div>
     </div>
