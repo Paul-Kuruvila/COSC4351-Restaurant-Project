@@ -43,8 +43,12 @@ describe("Test registration form", () => {
         expect(button).toHaveLength(1);
     });
     test('Submit button displays properly', async  () => {
-        const {getByTestId} = render(<Registration label = "Submit"></Registration >)
-        expect(getByTestId("button")).toHaveTextContent("Submit")
+        render(
+        <BrowserRouter>
+            <Register/>
+        </BrowserRouter>);
+        const text = screen.getByTestId("button"); 
+        expect(text).toHaveTextContent("Register")
     });
 
 });

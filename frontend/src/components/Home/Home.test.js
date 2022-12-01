@@ -45,7 +45,7 @@ describe("Test home form", () => {
         <BrowserRouter>
             <Home label = "Sign Up">
         </Home></BrowserRouter>)
-        expect(getByTestId("button")).toHaveTextContent("Sign Up")
+        expect(getByTestId("button")).toHaveTextContent("RESERVE SEATING HERE!")
     });
 
 });

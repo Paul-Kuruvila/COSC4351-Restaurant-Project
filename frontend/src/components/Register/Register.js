@@ -64,7 +64,7 @@ const Register = () => {
             <label className={validCred ? 'hide' : 'showInvalid'}>Username already exists. Please try another one.</label>
           </li>
           <li>
-            <button className='Submit' type='submit'>Register</button>
+            <button data-testid="button" className='Submit' type='submit'>Register</button>
           </li>
         </ul>
       </form>

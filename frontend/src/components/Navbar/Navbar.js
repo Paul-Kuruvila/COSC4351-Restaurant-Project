@@ -42,7 +42,7 @@ const Navbar = () => {
 
   return (
     <div className='Navbar'>
-      <div className='Logo' onClick={() => navigate('/')}>
+      <div data-testid="text" className='Logo' onClick={() => navigate('/')}>
         <img src={logo} alt={"Logo"}/>
         <h1>Seat Yourself!</h1>
       </div>
