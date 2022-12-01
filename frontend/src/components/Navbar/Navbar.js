@@ -1,5 +1,5 @@
 import './Navbar.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.png';
 
@@ -7,8 +7,37 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [LoginStatus, setLoginStatus] = useState(false);
 
-  const logoutHandler = () => {
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+			const response = await fetch('/loginstatus');
+			const jsonData = await response.json();
+			console.log(jsonData);
+			console.log(jsonData[1]);
+			setLoginStatus(jsonData[1]);
+		}
 
+		checkLoginStatus()
+			.catch(console.error);
+  }, [])
+
+  const logoutHandler = async() => {
+    const options = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      credentials: 'include'
+    };
+
+    const response = await fetch('/logout', options);
+    const jsonData = await response.json();
+
+    setLoginStatus(false);
+
+    if(jsonData.login === false) {
+      console.log(jsonData);
+      navigate('/');
+    } else {
+      console.log(jsonData);
+    }
   }
 
   return (

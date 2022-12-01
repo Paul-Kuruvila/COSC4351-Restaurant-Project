@@ -28,7 +28,7 @@ const Login = () => {
     if (jsonData.login) { //if login status is true/successful
         console.log(jsonData);
         navigate('/') //redirect to home page
-        //document.location.reload('true');
+        document.location.reload('true');
     } else {
         console.log(jsonData);
     }
