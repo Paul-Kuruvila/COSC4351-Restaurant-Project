@@ -65,6 +65,28 @@ function express_app(db) {  // export as function so that it can receive any spe
         }
     });
 
+    app.post('/reserve', function(request, response) {
+        let username = request.body.username;
+        let name = request.body.name;
+        let email = request.body.email;
+        let phoneNum = request.body.phoneNum;
+        let guests = request.body.guests;
+        let credit = request.body.credit;
+        let datetime = request.body.datetime;
+
+    
+        console.log(`Attempting to reserve ${username}...`);
+
+        db.reserveUser(username, name, email, phoneNum, guests, credit, datetime, request, response);
+        // response.send({
+        //     status: 'Registered user. (BACKEND)'
+        // });
+
+        response.end();
+        
+    });
+
+
     app.post('/auth', function(request, response) { //authenticating user logins //done by Eric
         // Capture the input fields
         let username = request.body.username;
