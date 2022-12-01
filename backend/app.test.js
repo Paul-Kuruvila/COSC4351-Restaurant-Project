@@ -69,7 +69,8 @@ describe("Unit Tests", () => {
         expect(registerUser.mock.calls[0][1]).toBe('123123');
         expect(registerUser.mock.calls[0][2]).toBe('t@fakemail.com');
         expect(registerUser.mock.calls[0][3]).toBe('1234567890');
-        expect(res.body.status).toEqual('Registered user. (FROM BACKEND)');
+        expect(res.status).toEqual(201);
+        //expect(res.body.status).toEqual('Registered user. (FROM BACKEND)');
     })
 
     it('POST /auth should fail to login if username or password is not entered', async () => {
@@ -77,16 +78,16 @@ describe("Unit Tests", () => {
         expect(res.status).toEqual(401);
     })
 
-    // it('POST /auth should successfully login for valid username and password', async () => {
-    //     const res = await requestWithSupertest.post('/auth').send({     // sending in test parameters to receive an unsuccessful response due to internal server error
-    //         username: 'test',
-    //         password: '123123',
-    //     });
-    //     expect(authUser.mock.calls.length).toBe(1);
-    //     expect(authUser.mock.calls[0][0]).toBe('test');
-    //     expect(authUser.mock.calls[0][1]).toBe('123123');
-    //     expect(res.status).toEqual(201);
-    // })
+    it('POST /auth should successfully login for valid username and password', async () => {
+        const res = await requestWithSupertest.post('/auth').send({     // sending in test parameters to receive an unsuccessful response due to internal server error
+            username: 'test',
+            password: '123123',
+        });
+        expect(authUser.mock.calls.length).toBe(1);
+        expect(authUser.mock.calls[0][0]).toBe('test');
+        expect(authUser.mock.calls[0][1]).toBe('123123');
+        expect(res.status).toEqual(201);
+    })
 
     it('POST /logout should successfully log user out', async () => {
         const res = await requestWithSupertest.post('/logout');

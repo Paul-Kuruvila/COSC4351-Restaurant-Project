@@ -51,12 +51,13 @@ function express_app(db) {  // export as function so that it can receive any spe
         let phoneNum = request.body.phoneNum;
 
         if(username && password) {
+            response.status(201); // not working properly for unit test
             console.log(`Attempting to register user ${username}...`);
             let registerStatus = db.registerUser(username, password, email, phoneNum, request, response);
-            response.status(201).send({
-                status: 'Registered user. (FROM BACKEND)',
-                registerStatus
-            });
+            // response.status(201).send({
+            //     status: 'Registered user. (FROM BACKEND)',
+            //     registerStatus
+            // });
         } else {
             response.status(400).send({
                 status: 'Please enter username and password! (FROM BACKEND)'
@@ -137,7 +138,7 @@ function express_app(db) {  // export as function so that it can receive any spe
 
         // Ensure the input fields exists and are not empty
 	    if (username && password) {
-            response.status(201);
+            response.status(201); // not working properly for unit test
             console.log("Successfully obtained username and password");
 		    db.authUser(username, password, request, response);
         } else {
