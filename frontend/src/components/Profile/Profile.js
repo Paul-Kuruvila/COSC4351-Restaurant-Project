@@ -6,13 +6,13 @@ import {useNavigate} from "react-router-dom";
 const Profile = ({label}) => {
     const navigate = useNavigate();
     const [name, setName] = useState();
-    const [mailaddress, setMailAddress] = useState();
+    const [email, setEmail] = useState();
     const [billaddress, setBillAddress] = useState();
     const [diner, setDiner] = useState();
     const [payment, setPayment] = useState();
 
     function editFields() {
-        let fields = ['name','mailaddress','billaddress','diner','payment'];
+        let fields = ['name','email','billaddress','diner','payment'];
         for(let i=0; i < fields.length; i++){
             document.getElementById(fields[i]).removeAttribute('readonly');
         }
@@ -81,7 +81,7 @@ const Profile = ({label}) => {
             data = await profileData();
             if(data.fullname !== "undefined"){
                 setName(data.name);
-                setMailAddress(data.mailaddress);
+                setEmail(data.email);
                 if(data.BillAddress !== "undefined")
                     setBillAddress(data.billaddress);
                 setDiner(data.diner);
@@ -98,7 +98,7 @@ const Profile = ({label}) => {
     const handleSubmit = async(e) => { //sending data to backend
         e.preventDefault();
         payment = document.getElementById('payment').value; //was state before
-        const profileData = {name, mailaddress, billaddress, diner, payment};
+        const profileData = {name, email, billaddress, diner, payment};
         
         const options = {
             method: 'POST',
@@ -124,52 +124,54 @@ const Profile = ({label}) => {
           <form onSubmit = {handleSubmit}>
             <ul className="information-boxes">
                 <label className='container-title'>Profile</label>
-                <li className='guest-info'>
-                    <label className="">Full Name</label>
-                    <input className="inputbox" id="name" type="text" minLength="2" maxLength="50" required placeholder="Enter your first and last name."
-                    value = {name}
-                    onChange = {(e) => setName(e.target.value)}
-                    onKeyPress = {(e) => requireChars(e)}
-                    onSelect = {(e) => checkEmpty(e)}
-                    readOnly="readonly"
-                    />
-                </li>
-                <li className='guest-info'>
-                    <label>Mailing Address</label>
-                    <input className="inputbox" id="mailaddress" type="text" minLength="1" maxLength="100"  required placeholder="Enter your mailing address."
-                    value = {mailaddress}
-                    onChange = {(e) => setMailAddress(e.target.value)}
-                    onSelect = {(e) => checkEmpty(e)}
-                    readOnly="readonly"
-                    />
-                </li>
-                <li className='guest-info'>
-                    <label>Billing Address</label>
-                    <input className="inputbox" id="billaddress" type="text" maxLength="100" placeholder="Enter your billing address, if applicable."
-                    value = {billaddress}
-                    onChange = {(e) => setBillAddress(e.target.value)}
-                    readOnly="readonly"
-                    />
-                </li>
-                <li className='guest-info'>
-                    <label>Diner</label>
-                    <input className="inputbox" id="diner" type="text" minLength="1" maxLength="100" required placeholder="Enter your preferred diner number."
-                    value = {diner}
-                    onChange = {(e) => setDiner(e.target.value)}
-                    onKeyPress = {(e) => requireNums(e)}
-                    onSelect = {(e) => checkEmpty(e)}
-                    readOnly="readonly"
-                    />
-                </li>
-                <li className='guest-info'>
-                    <label>Payment</label>
-                    <select className="inputbox" id="payment" name="state" defaultValue={""} value={payment} onChange = {(e) => setPayment(e.target.value)} disabled={true}>
-                        <option value="">Select a payment method</option>
-                        <option value="credit">Credit</option>    
-                        <option value="cash">Cash</option>
-                        <option value="check">Check</option>
-                    </select>
-                </li>
+                <ul className='boxes-container'>
+                    <li className='guest-info'>
+                        <label className="">Full Name</label>
+                        <input className="inputbox" id="name" type="text" minLength="2" maxLength="50" required placeholder="Enter your first and last name."
+                        value = {name}
+                        onChange = {(e) => setName(e.target.value)}
+                        onKeyPress = {(e) => requireChars(e)}
+                        onSelect = {(e) => checkEmpty(e)}
+                        readOnly="readonly"
+                        />
+                    </li>
+                    <li className='guest-info'>
+                        <label>Mailing Address</label>
+                        <input className="inputbox" id="email" type="text" minLength="1" maxLength="100"  required placeholder="Enter your mailing address."
+                        value = {email}
+                        onChange = {(e) => setEmail(e.target.value)}
+                        onSelect = {(e) => checkEmpty(e)}
+                        readOnly="readonly"
+                        />
+                    </li>
+                    <li className='guest-info'>
+                        <label>Billing Address</label>
+                        <input className="inputbox" id="billaddress" type="text" maxLength="100" placeholder="Enter your billing address, if applicable."
+                        value = {billaddress}
+                        onChange = {(e) => setBillAddress(e.target.value)}
+                        readOnly="readonly"
+                        />
+                    </li>
+                    <li className='guest-info'>
+                        <label>Diner</label>
+                        <input className="inputbox" id="diner" type="text" minLength="1" maxLength="100" required placeholder="Enter your preferred diner number."
+                        value = {diner}
+                        onChange = {(e) => setDiner(e.target.value)}
+                        onKeyPress = {(e) => requireNums(e)}
+                        onSelect = {(e) => checkEmpty(e)}
+                        readOnly="readonly"
+                        />
+                    </li>
+                    <li className='guest-info'>
+                        <label>Payment</label>
+                        <select className="inputbox" id="payment" name="state" defaultValue={""} value={payment} onChange = {(e) => setPayment(e.target.value)} disabled={true}>
+                            <option value="">Select a payment method</option>
+                            <option value="credit">Credit</option>    
+                            <option value="cash">Cash</option>
+                            <option value="check">Check</option>
+                        </select>
+                    </li>
+                </ul>
                 <li>
                     <div onClick={() => editFields()} id="edit" className="editbutton">Edit Information</div>
                 </li>
