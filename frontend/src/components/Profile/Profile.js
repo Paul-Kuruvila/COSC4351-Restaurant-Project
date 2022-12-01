@@ -1,4 +1,4 @@
-import './Profile.css';
+import './Profile.css'
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 
@@ -97,7 +97,7 @@ const Profile = ({label}) => {
 
     const handleSubmit = async(e) => { //sending data to backend
         e.preventDefault();
-        state = document.getElementById('payment').value; //was state before
+        payment = document.getElementById('payment').value; //was state before
         const profileData = {name, mailaddress, billaddress, diner, payment};
         
         const options = {
@@ -120,11 +120,11 @@ const Profile = ({label}) => {
     }
 
     return (
-      <div className="profile">
-          <h1>Profile</h1>
+      <div className="Login">
           <form onSubmit = {handleSubmit}>
-            <ul className="signup-boxes">
-                <li>
+            <ul className="information-boxes">
+                <label className='container-title'>Profile</label>
+                <li className='guest-info'>
                     <label className="">Full Name</label>
                     <input className="inputbox" id="name" type="text" minLength="2" maxLength="50" required placeholder="Enter your first and last name."
                     value = {name}
@@ -134,7 +134,7 @@ const Profile = ({label}) => {
                     readOnly="readonly"
                     />
                 </li>
-                <li>
+                <li className='guest-info'>
                     <label>Address 1</label>
                     <input className="inputbox" id="address" type="text" minLength="2" maxLength="100"  required placeholder="Enter your mailing address."
                     value = {mailaddress}
@@ -143,7 +143,7 @@ const Profile = ({label}) => {
                     readOnly="readonly"
                     />
                 </li>
-                <li>
+                <li className='guest-info'>
                     <label>Address 2</label>
                     <input className="inputbox" id="address2" type="text" maxLength="100" placeholder="Enter your billing address, if applicable."
                     value = {billaddress}
@@ -151,7 +151,7 @@ const Profile = ({label}) => {
                     readOnly="readonly"
                     />
                 </li>
-                <li>
+                <li className='guest-info'>
                     <label>Diner</label>
                     <input className="inputbox" id="diner#" type="text" minLength="2" maxLength="100" required placeholder="Enter your preferred diner number."
                     value = {diner}
@@ -160,7 +160,7 @@ const Profile = ({label}) => {
                     readOnly="readonly"
                     />
                 </li>
-                <li>
+                <li className='guest-info'>
                     <label>Payment</label>
                     <select className="inputbox" id="payments" name="state" defaultValue={""} value={payment} onChange = {(e) => setPayment(e.target.value)} disabled={true}>
                         <option value="">Select a payment method</option>
@@ -177,12 +177,13 @@ const Profile = ({label}) => {
                         <button data-testid="Submit"  className="Submit" type="submit" onClick={() => checkFields()}>Save{label}</button>
                     </div>
                 </li>
-            </ul>
-            <div id="fuelquote" className = "submitbutton">
+                <div id="fuelquote" className = "submitbutton">
                 <a href="\fuelquoteform">
-                    <button data-testid="button" className="Submit" type="button">Fuel Quote</button>
+                    <button data-testid="button" className="Submit" type="button">Reserve a Table</button>
                 </a>
             </div>
+            </ul>
+            
         </form>
         
       </div>
