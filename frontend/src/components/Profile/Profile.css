@@ -9,3 +9,7 @@
   text-decoration: underline;
   color: rgb(0, 105, 30);
 }
+
+select {
+  outline: none;
+}
