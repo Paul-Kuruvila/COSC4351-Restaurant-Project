@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 const Profile = ({label}) => {
     const navigate = useNavigate();
     const [name, setName] = useState();
+    const [phoneNum, setPhoneNum] = useState();
     const [email, setEmail] = useState();
     const [billaddress, setBillAddress] = useState();
     const [diner, setDiner] = useState();
@@ -101,7 +102,7 @@ const Profile = ({label}) => {
     const handleSubmit = async(e) => { //sending data to backend
         e.preventDefault();
         setPayment(document.getElementById('payment').value); //was state before
-        const profileData = {name, email, billaddress, diner, payment};
+        const profileData = {name, phoneNum, email, billaddress, diner, payment};
         
         const options = {
             method: 'POST',
@@ -129,7 +130,7 @@ const Profile = ({label}) => {
                 <label className='container-title'>Profile</label>
                 <ul className='boxes-container'>
                     <li className='guest-info'>
-                        <label className="">Full Name</label>
+                        <label className="Label">Full Name:</label>
                         <input className="inputbox" id="name" type="text" minLength="2" maxLength="50" required placeholder="Enter your first and last name."
                         value = {name}
                         onChange = {(e) => setName(e.target.value)}
@@ -139,7 +140,13 @@ const Profile = ({label}) => {
                         />
                     </li>
                     <li className='guest-info'>
-                        <label>Mailing Address</label>
+                        <label className='Label'>Phone Number:</label>
+                        <input className='inputbox' type='text' title='Please enter your phone number.' minLength="10" maxLength="10" required placeholder='Enter your phone number.'
+                        onChange = {(e) => setPhoneNum(e.target.value)}
+                        />
+                    </li>
+                    <li className='guest-info'>
+                        <label className="Label">Mailing Address:</label>
                         <input className="inputbox" id="email" type="text" minLength="1" maxLength="100"  required placeholder="Enter your mailing address."
                         value = {email}
                         onChange = {(e) => setEmail(e.target.value)}
@@ -148,7 +155,7 @@ const Profile = ({label}) => {
                         />
                     </li>
                     <li className='guest-info'>
-                        <label>Billing Address</label>
+                        <label className="Label">Billing Address:</label>
                         <input className="inputbox" id="billaddress" type="text" maxLength="100" placeholder="Enter your billing address, if applicable."
                         value = {billaddress}
                         onChange = {(e) => setBillAddress(e.target.value)}
@@ -156,7 +163,7 @@ const Profile = ({label}) => {
                         />
                     </li>
                     <li className='guest-info'>
-                        <label>Diner</label>
+                        <label className="Label">Preferred Diner:</label>
                         <input className="inputbox" id="diner" type="text" minLength="1" maxLength="100" required placeholder="Enter your preferred diner number."
                         value = {diner}
                         onChange = {(e) => setDiner(e.target.value)}
@@ -166,7 +173,7 @@ const Profile = ({label}) => {
                         />
                     </li>
                     <li className='guest-info'>
-                        <label>Payment</label>
+                        <label className="Label">Payment:</label>
                         <select className="inputbox" id="payment" name="state" defaultValue={""} value={payment} onChange = {(e) => setPayment(e.target.value)} disabled={true}>
                             <option value="">Select a payment method</option>
                             <option value="credit">Credit</option>    
