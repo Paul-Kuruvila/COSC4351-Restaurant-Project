@@ -153,7 +153,7 @@ const Profile = ({label}) => {
                 </li>
                 <li className='guest-info'>
                     <label>Diner</label>
-                    <input className="inputbox" id="diner" type="text" minLength="2" maxLength="100" required placeholder="Enter your preferred diner number."
+                    <input className="inputbox" id="diner" type="text" minLength="1" maxLength="100" required placeholder="Enter your preferred diner number."
                     value = {diner}
                     onChange = {(e) => setDiner(e.target.value)}
                     onKeyPress = {(e) => requireNums(e)}
@@ -175,7 +175,7 @@ const Profile = ({label}) => {
                 </li>
                 <li>
                     <div id="save" className = "submitbutton">
-                        <button data-testid="Submit"  className="Submit" type="submit" onClick={() => checkFields()}>Save{label}</button>
+                        <button data-testid="Submit"  className="Submit" type="submit" onClick={(e) => checkFields(e)}>Save{label}</button> //this needs to pass in e?
                     </div>
                 </li>
                 <div id="fuelquote" className = "submitbutton">
