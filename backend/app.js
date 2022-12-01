@@ -31,6 +31,19 @@ function express_app(db) {  // export as function so that it can receive any spe
         response.send([username, login]);
     });
 
+    app.post('/logout', function(request, response, next) { //force logout of user //done by Eric
+        request.session.loggedin = false;
+        let SID = request.sessionID;
+        let login = request.session.loggedin;
+        request.session.destroy();
+        response.send({
+            status: "Successfully logged out (FROM BACKEND)",
+            login
+        })
+        console.log("Successfully logged out (BACKEND)");
+        response.end();
+    });
+
     app.post('/register', function(request, response) {
         let username = request.body.username;
         let password = request.body.password;
