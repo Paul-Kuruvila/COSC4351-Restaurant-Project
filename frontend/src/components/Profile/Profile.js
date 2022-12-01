@@ -136,7 +136,7 @@ const Profile = ({label}) => {
                 </li>
                 <li className='guest-info'>
                     <label>Mailing Address</label>
-                    <input className="inputbox" id="address" type="text" minLength="2" maxLength="100"  required placeholder="Enter your mailing address."
+                    <input className="inputbox" id="mailaddress" type="text" minLength="2" maxLength="100"  required placeholder="Enter your mailing address."
                     value = {mailaddress}
                     onChange = {(e) => setMailAddress(e.target.value)}
                     onSelect = {(e) => checkEmpty(e)}
@@ -145,7 +145,7 @@ const Profile = ({label}) => {
                 </li>
                 <li className='guest-info'>
                     <label>Billing Address</label>
-                    <input className="inputbox" id="address2" type="text" maxLength="100" placeholder="Enter your billing address, if applicable."
+                    <input className="inputbox" id="billaddress" type="text" maxLength="100" placeholder="Enter your billing address, if applicable."
                     value = {billaddress}
                     onChange = {(e) => setBillAddress(e.target.value)}
                     readOnly="readonly"
@@ -153,7 +153,7 @@ const Profile = ({label}) => {
                 </li>
                 <li className='guest-info'>
                     <label>Diner</label>
-                    <input className="inputbox" id="diner#" type="text" minLength="2" maxLength="100" required placeholder="Enter your preferred diner number."
+                    <input className="inputbox" id="diner" type="text" minLength="2" maxLength="100" required placeholder="Enter your preferred diner number."
                     value = {diner}
                     onChange = {(e) => setDiner(e.target.value)}
                     onKeyPress = {(e) => requireNums(e)}
@@ -163,7 +163,7 @@ const Profile = ({label}) => {
                 </li>
                 <li className='guest-info'>
                     <label>Payment</label>
-                    <select className="inputbox" id="payments" name="state" defaultValue={""} value={payment} onChange = {(e) => setPayment(e.target.value)} disabled={true}>
+                    <select className="inputbox" id="payment" name="state" defaultValue={""} value={payment} onChange = {(e) => setPayment(e.target.value)} disabled={true}>
                         <option value="">Select a payment method</option>
                         <option value="credit">Credit</option>    
                         <option value="cash">Cash</option>
