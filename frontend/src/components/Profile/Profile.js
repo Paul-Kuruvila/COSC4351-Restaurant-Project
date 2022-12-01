@@ -27,13 +27,16 @@ const Profile = ({label}) => {
     function checkFields(e) {
         console.log(document.getElementById('name').value[0])
         if(document.getElementById('name').value[0]===" "){
-            alert("One or more required fields empty!");
+            alert("One or more required fields empty! Cannot start fields with a space!");
             e.preventDefault();
-        } else if(document.getElementById('city').value[0]===" "){
-            alert("One or more required fields empty!");
+        } else if(document.getElementById('email').value[0]===" "){
+            alert("One or more required fields empty! Cannot start fields with a space!");
             e.preventDefault();
-        } else if(document.getElementById('zipcode')===" "){
-            alert("One or more required fields empty!");
+        } else if(document.getElementById('billaddress')===" "){
+            alert("One or more required fields empty! Cannot start fields with a space!");
+            e.preventDefault();
+        } else if(document.getElementById('diner')===" "){
+            alert("One or more required fields empty! Cannot start fields with a space!");
             e.preventDefault();
         } else {
             return;
@@ -82,7 +85,7 @@ const Profile = ({label}) => {
             if(data.fullname !== "undefined"){
                 setName(data.name);
                 setEmail(data.email);
-                if(data.BillAddress !== "undefined")
+                if(data.billaddress !== "undefined")
                     setBillAddress(data.billaddress);
                 setDiner(data.diner);
                 setPayment(data.payment);
@@ -97,7 +100,7 @@ const Profile = ({label}) => {
 
     const handleSubmit = async(e) => { //sending data to backend
         e.preventDefault();
-        payment = document.getElementById('payment').value; //was state before
+        setPayment(document.getElementById('payment').value); //was state before
         const profileData = {name, email, billaddress, diner, payment};
         
         const options = {
