@@ -16,7 +16,7 @@
 ```
 **ReservationInfo**
 
-``create table ReservationInfo(name VARCHAR(255) NOT NULL, phonenum VARCHAR(255) NOT NULL, email VARCHAR(255), guestnum INT NOT NULL, datetime DATETIME NOT NULL, credit VARCHAR(255));`` added primary key id autoincrement and not null userid
+``create table ReservationInfo(name VARCHAR(255) NOT NULL, phonenum VARCHAR(255) NOT NULL, email VARCHAR(255), guestnum INT NOT NULL, datetime DATETIME NOT NULL, credit VARCHAR(255));`` added primary key id autoincrement and userid (can be null)
 ```
 +----------+--------------+------+-----+---------+-------+
 | Field    | Type         | Null | Key | Default | Extra |

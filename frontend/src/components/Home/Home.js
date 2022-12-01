@@ -41,7 +41,7 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <button className='ReserveButton' onClick ={() => navigate('/reserve')}>RESERVE SEATING HERE!</button>
+      <button data-testid="button" className='ReserveButton' onClick ={() => navigate('/reserve')}>RESERVE SEATING HERE!</button>
     </div>
   );
 }
