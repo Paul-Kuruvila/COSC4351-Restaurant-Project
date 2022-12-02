@@ -41,14 +41,14 @@ const Login = () => {
             <ul className="information-boxes">
                 <label className='container-title'>LOGIN</label>
                 <ul className='boxes-container'>
-                    <li className='usernameArea'>
+                    <li className='guest-info'>
                         <label className="Label">Username:</label>
                         <input id="username" className="inputbox" type="text" title="Please enter your username." minLength="2" maxLength="50" required placeholder="Enter your username."
                         onChange = {(e) => setUsername(e.target.value)}
                         onSelect = {() => setValidity(true)}
                         />
                     </li>
-                    <li className='passwordArea'>
+                    <li className='guest-info'>
                         <label className="Label">Password:</label>
                         <input id="password" className="inputbox" type="password" title="Please enter your password." minLength="2" maxLength="50" required placeholder="Enter your password."
                         onChange = {(e) => setPassword(e.target.value)}

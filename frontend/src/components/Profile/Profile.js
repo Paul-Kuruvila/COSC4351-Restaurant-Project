@@ -8,17 +8,17 @@ const Profile = ({label}) => {
     const [name, setName] = useState();
     const [phoneNum, setPhoneNum] = useState();
     const [email, setEmail] = useState();
+    const [mailaddress, setMailAddress] = useState();
     const [billaddress, setBillAddress] = useState();
     const [diner, setDiner] = useState();
     const [payment, setPayment] = useState();
 
     function editFields() {
-        let fields = ['name','email','billaddress','diner','payment'];
+        let fields = ['name','email','mailaddress','billaddress','diner','payment'];
         for(let i=0; i < fields.length; i++){
             document.getElementById(fields[i]).removeAttribute('readonly');
         }
-        document.getElementById('payment').removeAttribute('disabled'); //was state before
-        let buttons = ['save', 'logout', 'fuelquote'];
+        let buttons = ['save', 'logout', 'reserve'];
         for(let i=0; i < buttons.length; i++){
             document.getElementById(buttons[i]).style.margin = '15px';
         }
@@ -31,6 +31,9 @@ const Profile = ({label}) => {
             alert("One or more required fields empty! Cannot start fields with a space!");
             e.preventDefault();
         } else if(document.getElementById('email').value[0]===" "){
+            alert("One or more required fields empty! Cannot start fields with a space!");
+            e.preventDefault();
+        } else if(document.getElementById('mailaddress')===" "){
             alert("One or more required fields empty! Cannot start fields with a space!");
             e.preventDefault();
         } else if(document.getElementById('billaddress')===" "){
@@ -87,6 +90,8 @@ const Profile = ({label}) => {
                 setName(data.name);
                 setEmail(data.email);
                 setPhoneNum(data.phonenum);
+                if(data.mailaddress !== "undefined")
+                    setMailAddress(data.billaddress);
                 if(data.billaddress !== "undefined")
                     setBillAddress(data.billaddress);
                 setDiner(data.diner);
@@ -126,7 +131,8 @@ const Profile = ({label}) => {
 
     return (
       <div className="Login">
-          <form onSubmit = {handleSubmit}>
+        <div style={{height: '5rem'}}></div>
+        <form onSubmit = {handleSubmit}>
             <ul className="information-boxes">
                 <label className='container-title'>Profile</label>
                 <ul className='boxes-container'>
@@ -148,10 +154,19 @@ const Profile = ({label}) => {
                         />
                     </li>
                     <li className='guest-info'>
-                        <label className="Label">Mailing Address:</label>
+                        <label className="Label">E-mail:</label>
                         <input className="inputbox" id="email" type="text" minLength="1" maxLength="100"  required placeholder="Enter your mailing address."
                         value = {email}
                         onChange = {(e) => setEmail(e.target.value)}
+                        onSelect = {(e) => checkEmpty(e)}
+                        readOnly="readonly"
+                        />
+                    </li>
+                    <li className='guest-info'>
+                        <label className="Label">Mailing Address:</label>
+                        <input className="inputbox" id="mailaddress" type="text" minLength="1" maxLength="100"  required placeholder="Enter your mailing address."
+                        value = {mailaddress}
+                        onChange = {(e) => setMailAddress(e.target.value)}
                         onSelect = {(e) => checkEmpty(e)}
                         readOnly="readonly"
                         />
@@ -185,19 +200,17 @@ const Profile = ({label}) => {
                     </li>
                 </ul>
                 <li>
-                    <div onClick={() => editFields()} id="edit" className="editbutton">Edit Information</div>
+                    <div onClick={() => editFields()} id="edit">Edit Information</div>
                 </li>
                 <li>
-                    <div id="save" className = "submitbutton">
-                        <button data-testid="Submit"  className="Submit" type="submit" onClick={(e) => checkFields(e)}>Save{label}</button> 
-                    </div>
+                    <button data-testid="Submit"  className="Submit" id='save' type="submit" onClick={(e) => checkFields(e)}>Save{label}</button> 
                 </li>
-                <div id="fuelquote" className = "submitbutton">
-                <button data-testid="button" className="Submit" style={{height:'60px'}} type="button" onClick={() => { 
-                    navigate('/reserve');
-                    document.location.reload('true'); 
-                }}>Reserve a Table</button>
-            </div>
+                <li>
+                    <button data-testid="button" className="Submit" id='reserve'  type="button" onClick={() => { 
+                        navigate('/reserve');
+                        document.location.reload('true'); 
+                    }}>Reserve a Table</button>
+                </li>
             </ul>
             
         </form>
