@@ -62,6 +62,7 @@
 }
 
 .Login-Options .profile-button {
+    margin-right: 1.5rem;
     opacity: 1;
     cursor: pointer;
     color: rgb(0, 105, 135);

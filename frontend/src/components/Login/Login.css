@@ -37,13 +37,13 @@ input {
 
 .information-boxes .container-title2 {
     color: #4C2600;
-    text-shadow: 2px 2px 1px rgba(110, 110, 0, 0.5);
-    font-size: 24pt;
+    font-size: 20pt;
     font-weight: bold;
     margin-bottom: 2rem;
 }
 
 .information-boxes .container-description {
+    text-align: center;
     font-size: 14pt;
     color: rgb(0, 105, 135);
     padding-bottom: 1rem;
@@ -72,22 +72,6 @@ input {
 .Label {
     font-size: 20pt;
     color: #4C2600;
-}
-
-.passwordArea {
-    margin: 1.5rem 0 1.5rem 0;
-}
-
-.usernameArea input, .passwordArea input {
-    display: inline-block;
-    margin-left: 0.5rem;
-    background-color: rgba(110, 110, 0, 0.5);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-}
-
-.usernameArea input::placeholder, .passwordArea input::placeholder {
-    color: rgba(0, 0, 0, 0.4);
 }
 
 .show {
