@@ -6,6 +6,8 @@ import Login from './components/Login/Login';
 import Reserve from './components/Reserve/Reserve';
 import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
+import ThankYou from './components/ThankYou/ThankYou';
+import ReserveInfo from './components/ReserveInfo/ReserveInfo';
 
 const App = () => {
     return (
@@ -20,6 +22,8 @@ const App = () => {
                         <Route path = '/reserve' element={<Reserve />} />
                         <Route path = '/register' element={<Register />} />
                         <Route path = '/profile' element={<Profile />} />
+                        <Route path = '/thankyou' element={<ThankYou />} />
+                        <Route path = '/reserveinfo' element={<ReserveInfo />} />
                     </Routes>
                 </div>
             </div>
