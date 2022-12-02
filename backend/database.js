@@ -85,6 +85,7 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, credit, 
         if(results.length > 0) {
             response.send({
                 status: 'There is already a reservation under this phone number! (BACKEND)',
+                priorReservation: true
             });
             console.log('There is already a reservation under this phone number! (BACKEND)');
         }

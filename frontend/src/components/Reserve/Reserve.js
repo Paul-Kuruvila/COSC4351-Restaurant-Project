@@ -8,11 +8,12 @@ const Reserve = () => {
 	const [name, setName] = useState();
 	const [datetime, setDateTime] = useState("test");
 	const [hightraffic, setHighTraffic] = useState(false);
-	const [credit, setCredit] = useState();
+	const [cardInfo, setCardInfo] = useState({name: '', type: '', number: '', security: '', expirationMonth: '', expirationYear: ''});
 	const [phoneNum, setPhoneNum] = useState();
 	const [email, setEmail] = useState();
 	const [guests, setGuests] = useState();
 	const [suggestRegister, setSuggestRegister] = useState(false);
+	const [alreadyReserved, setAlreadyReserved] = useState(false);
 
 	const profileData = async () => { //retrieving profile data from backend which is retrieved from database
 		const response = await fetch('/profiledata')
@@ -28,7 +29,7 @@ const Reserve = () => {
 			setEmail(data.email);
 			if(data.phonenum !== "undefined")
 				setPhoneNum(data.phonenum);
-			setCredit(credit);
+			//setCredit(credit);
 			//setEmail(data.email);
 		} catch (e) {
 			console.log("Error fetching profile data from backend");
@@ -71,7 +72,7 @@ const Reserve = () => {
 
 	const handleSubmit = async (e) => { //sending data
 		e.preventDefault();
-		const guestData = {name, phoneNum, email, guests, datetime, credit};
+		const guestData = {name, phoneNum, email, guests, datetime/*, credit*/};
 		const options = {
 			method: 'POST',
 			headers: {"Content-Type": "application/json"},
@@ -85,11 +86,13 @@ const Reserve = () => {
 		//The jsonData has a status that is returned to let us know if the reservation was successful or failed, and why it failed.
 		if (jsonData.reserved && !jsonData.login) { //if reservation is successful and not logged in
 			console.log(jsonData);
-			//navigate('/register') //redirect to registration page and notify of successful registration
+			navigate('/thankyou') //redirect to registration page and notify of successful registration
 		} else if (jsonData.reserved) { //if reservation was successful and logged in
 			console.log(jsonData);
-			//navigate('success') //redirect to successful reservation OR we can simply do the container box text that pops up
+			navigate('/thankyou') //redirect to successful reservation OR we can simply do the container box text that pops up
 		} else { //If the reservation failed.
+			if(jsonData.priorReservation) // if there is already a reservation under the number, priorReservation will be true, otherwise it will be undefined.
+				setAlreadyReserved(true);
 			console.log(jsonData) //i.e.: there is already a reservation under the number; Info failed to reserve. (FROM BACKEND)
 		}
 	}
@@ -109,70 +112,159 @@ const Reserve = () => {
 		<div className='Reserve'>
 			<div style={{height: '5rem'}}></div>
 			<form onSubmit = {handleSubmit}>
-				<ul className={suggestRegister ? 'hide' : 'information-boxes'}>
-					<label className='container-title'>RESERVE A TABLE</label>
-					<p className='container-description'>Before you can reserve a table, we're going to need some information:</p>
-					<ul className='boxes-container'>
-						<li className='guest-info'>
-							<label className='Label'>Name:</label>
-							<input className='inputbox' type='text' title='Please enter your name.' minLength="2" maxLength="50" required placeholder='Enter your name.'
-							onChange = {(e) => setName(e.target.value)}
-							value = {name}
-							/>
-						</li>
-						<li className='guest-info'>
-							<label className='Label'>Phone Number:</label>
-							<input className='inputbox' type='text' title='Please enter your phone number.' minLength="10" maxLength="10" required placeholder='Enter your phone number.'
-							onChange = {(e) => setPhoneNum(e.target.value)}
-							onKeyPress = {(e) => requireNums(e)}
-							value = {phoneNum}
-							/>
-						</li>
-						<li className='guest-info'>
-							<label className='Label'>Email:</label>
-							<input className='inputbox' type='text' title='Please enter your email.' minLength="2" maxLength="100" required placeholder='Enter your email.'
-							onChange = {(e) => setEmail(e.target.value)}
-							value = {email}
-							/>
-						</li>
-						<li className='guest-info'>
-							<label className='Label'>Number of Guests:</label>
-							<input className='inputbox' type='text' title='Please enter the number of guests.' required placeholder='Enter the number of guests.'
-							onChange = {(e) => setGuests(e.target.value)}
-							onKeyPress = {(e) => requireNums(e)}
-							value = {guests}
-							/>
-						</li>
-							<form>
-								<label className='Label'>Date and Time:</label>
-								<input
-									type='datetime-local'
-									id='DT'
-									name=''
-									min='2022-12-01T14:10'
-									max='2023-12-01T14:10'
-									onChange = {(e) => specialDays(e)} 
+				<div className={alreadyReserved ? 'hide' : 'show'}>
+					<ul className={suggestRegister ? 'hide' : 'information-boxes'}>
+						<label className='container-title'>RESERVE A TABLE</label>
+						<p className='container-description'>Before you can reserve a table, we're going to need some information:</p>
+						<ul className='boxes-container'>
+							<li className='guest-info'>
+								<label className='Label'>Name:</label>
+								<input className='inputbox' type='text' title='Please enter your name.' minLength="2" maxLength="50" required placeholder='Enter your name.'
+								onChange = {(e) => setName(e.target.value)}
+								value = {name}
 								/>
-							</form>
+							</li>
+							<li className='guest-info'>
+								<label className='Label'>Phone Number:</label>
+								<input className='inputbox' type='text' title='Please enter your phone number.' minLength="10" maxLength="10" required placeholder='Enter your phone number.'
+								onChange = {(e) => setPhoneNum(e.target.value)}
+								onKeyPress = {(e) => requireNums(e)}
+								value = {phoneNum}
+								/>
+							</li>
+							<li className='guest-info'>
+								<label className='Label'>Email:</label>
+								<input className='inputbox' type='text' title='Please enter your email.' minLength="2" maxLength="100" required placeholder='Enter your email.'
+								onChange = {(e) => setEmail(e.target.value)}
+								value = {email}
+								/>
+							</li>
+							<li className='guest-info'>
+								<label className='Label'>Number of Guests:</label>
+								<input className='inputbox' type='text' title='Please enter the number of guests.' required placeholder='Enter the number of guests.'
+								onChange = {(e) => setGuests(e.target.value)}
+								onKeyPress = {(e) => requireNums(e)}
+								value = {guests}
+								/>
+							</li>
+								<form>
+									<label className='Label'>Date and Time:</label>
+									<input
+										type='datetime-local'
+										id='DT'
+										name=''
+										min='2022-12-01T14:10'
+										max='2023-12-01T14:10'
+										onChange = {(e) => specialDays(e)} 
+									/>
+								</form>
+						</ul>
+						<li>
+							<button className={hightraffic ? 'hide' : 'Submit'} type='submit'>Submit</button> 
+						</li>
+						<li>
+							<ul className={hightraffic ? "show" : "hide"}>
+								<label className={hightraffic ? 'showInvalid' : 'hide'}>High traffic days require a valid credit card as you will be charged a <b>$10 FEE FOR NO SHOWS.</b><br />Please enter your credit card information.</label>
+								<ul className='boxes-container'>
+									<li className='guest-info'>
+										<label className='Label'>Card Type:</label>
+										<select className="inputbox" name="exp-month" defaultValue={""} value={cardInfo['type']} required
+											disabled={!hightraffic}
+											onChange = {(e) => setCardInfo({name: cardInfo['name'], type: e.target.value, number: cardInfo['number'], security: cardInfo['security'], expirationMonth: cardInfo['expirationMonth'], expirationYear: cardInfo['expirationYear']})}>
+											<option value="">Select Credit Card Type</option>
+											<option value="Visa">Visa</option>
+											<option value="MasterCard">MasterCard</option>
+											<option value="AmericanExpress">AmericanExpress</option>
+											<option value="Discover">Discover</option>
+											<option value="JCB">JCB</option>
+										</select>
+									</li>
+									<li className='guest-info'>
+										<label className='Label'>Name on Card:</label>
+										<input className='inputbox' type='text' title='Please enter the name on the card exactly as it appears.' required placeholder='Enter name on card.'
+											disabled={!hightraffic}
+											onChange = {(e) => setCardInfo({name: e.target.value, type: cardInfo['type'], number: cardInfo['number'], security: cardInfo['security'], expirationMonth: cardInfo['expirationMonth'], expirationYear: cardInfo['expirationYear']})}
+											value = {cardInfo['name']}
+										/>
+									</li>
+									<li className='guest-info'>
+										<label className='Label'>Card Number:</label>
+										<input className='inputbox' type='text' title='Please enter your credit card number.' required placeholder='Enter card number.'
+											disabled={!hightraffic}
+											minLength='16'
+											maxlength='16'
+											onChange = {(e) => setCardInfo({name: cardInfo['name'], type: cardInfo['type'], number: e.target.value, security: cardInfo['security'], expirationMonth: cardInfo['expirationMonth'], expirationYear: cardInfo['expirationYear']})}
+											onKeyPress = {(e) => requireNums(e)}
+											value = {cardInfo['number']}
+										/>
+									</li>
+									<li className='guest-info'>
+										<label className='Label'>Security Code:</label>
+										<input className='inputbox' type='text' title='Please enter your credit card security code.' required placeholder='Enter security code.'
+											disabled={!hightraffic}
+											minLength='3'
+											maxLength='3'
+											onChange = {(e) => setCardInfo({name: cardInfo['name'], type: cardInfo['type'], number: cardInfo['number'], security: e.target.value, expirationMonth: cardInfo['expirationMonth'], expirationYear: cardInfo['expirationYear']})}
+											onKeyPress = {(e) => requireNums(e)}
+											value = {cardInfo['security']}
+										/>
+									</li>
+									<li className='guest-info'>
+										<label className='Label'>Expiration Date:</label>
+										<select className="inputbox" name="exp-month" defaultValue={""} value={cardInfo['expirationMonth']} required
+											disabled={!hightraffic}
+											onChange = {(e) => setCardInfo({name: cardInfo['name'], type: cardInfo['type'], number: cardInfo['number'], security: cardInfo['security'], expirationMonth: e.target.value, expirationYear: cardInfo['expirationYear']})}>
+											<option value="">Month</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+										</select>
+										<select className="inputbox" name="exp-day" defaultValue={""} value={cardInfo['expirationYear']} required
+											disabled={!hightraffic}
+											onChange = {(e) => setCardInfo({name: cardInfo['name'], type: cardInfo['type'], number: cardInfo['number'], security: cardInfo['security'], expirationMonth: cardInfo['expirationMonth'], expirationYear: e.target.value})}>
+											<option value="">Year</option>
+											<option value="2022">2022</option>    
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<option value="2025">2025</option>
+											<option value="2026">2026</option>
+											<option value="2027">2027</option>    
+											<option value="2028">2028</option>
+											<option value="2029">2029</option>
+											<option value="2030">2030</option>    
+											<option value="2031">2031</option>
+											<option value="2032">2032</option>
+											<option value="2033">2033</option>
+										</select>
+									</li>
+								</ul>
+							</ul>
+						</li>
+						<li>
+							<label className={alreadyReserved ? 'container-title2' : 'hide'}>You already have a reservation! Click <a href='reserveinfo'>here</a> to view and/or cancel your current reservation.</label>
+						</li>
+						<li>
+							<button className={hightraffic ? 'Submit' : 'hide'} type='submit'>Submit</button> 
+						</li>
 					</ul>
-					<li>
-						<button className='Submit' type='submit'>Submit</button> 
-					</li>
-					<li>
-						{/* <ul className={hightraffic ? "show" : "hide"}>
-							<label className= "labels"> High traffic days required a valid credit card. Please enter your credit card information.</label>
-							<input className='inputbox' type='text' title='Please enter your credit card information.' required placeholder='Enter your credit card information.'
-							onChange = {(e) => setCredit(e.target.value)}
-							onKeyPress = {(e) => requireNums(e)}
-							value = {credit}
-							/>
-						</ul> */}
-                	</li>
-				</ul>
-				<ul className={suggestRegister ? 'information-boxes' : 'hide'}>
+				</div>
+				<ul className={suggestRegister && !alreadyReserved ? 'information-boxes' : 'hide'}>
 					<label className='container-title2'>HEY, WE NOTICED YOU AREN'T LOGGED IN!</label>
 					<p className='container-description'>You can login <a href='login'>here</a>, or if you don't have an account, you can register <a href='register'>here</a>.</p>
 					<i className='container-option' onClick={() => ReserveAnyways()}>Proceed without registering</i>
+				</ul>
+				<ul className={alreadyReserved ? 'information-boxes' : 'hide'}>
+					<label className='container-title2'>YOU ALREADY HAVE A RESERVATION</label>
+					<p className='container-description'>You view your reservation information <a href='reserveinfo'>here</a> and/or cancel your current reservation, or click <a style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={() => navigate('/')}>here</a> to return to our home page.</p>
 				</ul>
 			</form>
 		</div>
@@ -180,4 +272,3 @@ const Reserve = () => {
 }
 
 export default Reserve;
-//<label className={hightraffic ? "hide" : "showInvalid"}>{hightraffic ? <p>High traffic days required a valid credit card.<br/>Please enter your credit card information.</p> : 'May require credit card information on a high traffic day.'}</label>
