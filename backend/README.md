@@ -33,17 +33,19 @@
 ```
 **ProfileInfo**
 
-``create table ProfileInfo(id INT NOT NULL AUTO_INCREMENT, userid INT NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255), phonenum VARCHAR(10), billaddress VARCHAR(255), diner INT NOT NULL, payment VARCHAR(255), PRIMARY KEY(id));``
+``create table ProfileInfo(id INT NOT NULL AUTO_INCREMENT, userid INT NOT NULL, mailaddress VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255), phonenum VARCHAR(10), billaddress VARCHAR(255), diner INT NOT NULL, payment VARCHAR(255), PRIMARY KEY(id));``
 ```
 +-------------+--------------+------+-----+---------+----------------+
 | Field       | Type         | Null | Key | Default | Extra          |
 +-------------+--------------+------+-----+---------+----------------+
-| userid      | int          | NO   | PRI | NULL    |                |
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| userid      | int          | NO   |     | NULL    |                |
 | name        | varchar(255) | NO   |     | NULL    |                |
+| mailaddress | varchar(255) | NO   |     | NULL    |                |
 | email       | varchar(255) | YES  |     | NULL    |                |
 | billaddress | varchar(255) | YES  |     | NULL    |                |
 | diner       | int          | NO   |     | NULL    |                |
 | payment     | varchar(255) | YES  |     | NULL    |                |
-| phonenum    | varchar(10)  | NO   |     | NULL    |                |
+| phonenum    | varchar(10)  | YES  |     | NULL    |                |
 +-------------+--------------+------+-----+---------+----------------+
 ```

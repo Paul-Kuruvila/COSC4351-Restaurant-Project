@@ -120,7 +120,7 @@ function reserveUser(username, name, email, phoneNum, guests, datetime, credit, 
 function getProfile(username, request, response){
     if (request.session.loggedin || request.body.loggedin === 'yes') { // request.body.loggedin will never evaluate to 'yes' aside from testing purposes
         console.log(`Attempting to retrieve stored information for ${username}...`);
-        connection.query(`SELECT name, email, billaddress, diner, payment, phonenum FROM ProfileInfo WHERE (SELECT userid FROM UserCredentials WHERE username = '${username}') = ProfileInfo.userid`, (err, results) => {
+        connection.query(`SELECT name, mailaddress, email, billaddress, diner, payment, phonenum FROM ProfileInfo WHERE (SELECT userid FROM UserCredentials WHERE username = '${username}') = ProfileInfo.userid`, (err, results) => {
             if (err) throw err;
 
             var data;
@@ -136,24 +136,24 @@ function getProfile(username, request, response){
     }
 }
  
-function saveProfile(username, name, email, phoneNum, billaddress, diner, payment, request, response) {
-    let login = request.session.loggedin;
+function saveProfile(username, name, email, phoneNum, mailaddress, billaddress, diner, payment, request, response) {
     let savedInfo = false;
 
     console.log(`phone num is ${phoneNum}`);
+    console.log(`payment is ${payment}`);
+    console.log(`diner is ${diner}`);
 
     try {
         connection.promise().query(
-            `INSERT INTO ProfileInfo (userid, name, phonenum, email, billaddress, diner, payment)  
+            `INSERT INTO ProfileInfo (userid, name, phonenum, email, mailaddress, billaddress, diner, payment)  
             VALUES((SELECT userid FROM UserCredentials WHERE username = '${username}'), 
-            '${name}','${phoneNum}', '${email}', '${billaddress}', '${diner}', '${payment}') ON DUPLICATE KEY
-            UPDATE name='${name}', phonenum='${phoneNum}', email='${email}', billaddress='${billaddress}', diner='${diner}', payment='${payment}'`
+            '${name}','${phoneNum}', '${email}', '${mailaddress}', '${billaddress}', '${diner}', '${payment}') ON DUPLICATE KEY
+            UPDATE name='${name}', phonenum='${phoneNum}', email='${email}', mailaddress='${mailaddress}', billaddress='${billaddress}', diner='${diner}', payment='${payment}'`
         );
         savedInfo = true;
         //testprof(savedInfo);
         response.status(201).send({
-            status: 'Information saved.', 
-            login,
+            status: 'Information saved.',
             savedInfo
         });
         console.log("Information saved.");

@@ -147,17 +147,18 @@ function express_app(db) {  // export as function so that it can receive any spe
         if(username == undefined)   username = request.body.username; // request.body.username will always be undefined aside for testing purposes
         let name = request.body.name;
         let email = request.body.email;
+        let mailaddress = request.body.mailaddress;
         let billaddress = request.body.billaddress;
         let diner = request.body.diner;
         let payment = request.body.payment;
         let phoneNum = request.body.phoneNum;
 
-        console.log(`The things that were received are as follows: username=${username}, name=${name}, email=${email}, phoneNum=${phoneNum}, billaddress=${billaddress}, diner=${diner}, and payment=${payment}`)
+        console.log(`The things that were received are as follows: username=${username}, name=${name}, email=${email}, phoneNum=${phoneNum}, mailaddress=${mailaddress}, billaddress=${billaddress}, diner=${diner}, and payment=${payment}`)
     
         console.log(`Attempting to save profile ${username}...`);
 
         if (request.session.loggedin || request.body.loggedin === 'yes') {
-            db.saveProfile(username, name, email, phoneNum, billaddress, diner, payment, request, response);
+            db.saveProfile(username, name, email, phoneNum, mailaddress, billaddress, diner, payment, request, response);
             if(request.body.loggedin === 'yes'){ // request.body.loggedin will never evaluate to 'yes' aside from testing purposes
                 response.status(201).send({
                     status: "Successfully updated profile. (FROM BACKEND)"
