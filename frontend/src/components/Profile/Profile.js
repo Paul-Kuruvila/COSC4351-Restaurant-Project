@@ -1,10 +1,11 @@
 import './Profile.css'
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
 
 //html/validation/etc. handled by Paul; http requests handled by Eric ; button handler for testing by David
 const Profile = ({label}) => {
     const navigate = useNavigate();
+    const [canEdit, setEdit] = useState(false);
     const [name, setName] = useState();
     const [phoneNum, setPhoneNum] = useState();
     const [email, setEmail] = useState();
@@ -14,15 +15,16 @@ const Profile = ({label}) => {
     const [payment, setPayment] = useState();
 
     function editFields() {
-        let fields = ['name','email','mailaddress','billaddress','diner','payment'];
-        for(let i=0; i < fields.length; i++){
-            document.getElementById(fields[i]).removeAttribute('readonly');
-        }
-        let buttons = ['save', 'logout', 'reserve'];
-        for(let i=0; i < buttons.length; i++){
-            document.getElementById(buttons[i]).style.margin = '15px';
-        }
-        document.getElementById('edit').style.display = 'none';
+        // let fields = ['name','email','mailaddress','billaddress','diner'];
+        // for(let i=0; i < fields.length; i++){
+        //     document.getElementById(fields[i]).removeAttribute('readonly');
+        // }
+        document.getElementById('payment').disabled = 'false';
+        // let buttons = ['save', 'logout', 'reserve'];
+        // for(let i=0; i < buttons.length; i++){
+        //     document.getElementById(buttons[i]).style.margin = '15px';
+        // }
+        // document.getElementById('edit').style.display = 'none';
     }
 
     function checkFields(e) {
@@ -54,10 +56,6 @@ const Profile = ({label}) => {
     }
 
     function requireChars(e) { // prevents numbers from being typed
-        console.log(e.key);
-        console.log(e.target.value[0]);
-        console.log(e.target.value.length);
-        console.log(e.target.value);
         if((e.target.value[0] === ' ' || e.target.value[0] === undefined) && e.key === ' '){
             e.preventDefault();
         }
@@ -75,25 +73,25 @@ const Profile = ({label}) => {
         }
     }
 
-    const profileData = async () => { //retrieving profile data from backend which is retrieved from database
-        const response = await fetch('/profiledata');
-        const jsonData = await response.json();
-
-        return jsonData;
-    }
-
-    document.addEventListener("DOMContentLoaded", async () => { //set variables for visual rendering on page load
+    const updateFields = async () => {
         let data = [];
         try {
             data = await profileData();
             if(data.fullname !== "undefined"){
                 setName(data.name);
-                setEmail(data.email);
+                if(data.email !== 'undefined')
+                    setEmail(data.email);
+                else
+                    setEmail('');
                 setPhoneNum(data.phonenum);
                 if(data.mailaddress !== "undefined")
-                    setMailAddress(data.billaddress);
+                    setMailAddress(data.mailaddress);
+                else
+                    setMailAddress('');
                 if(data.billaddress !== "undefined")
                     setBillAddress(data.billaddress);
+                else
+                    setBillAddress('');
                 setDiner(data.diner);
                 setPayment(data.payment);
             }
@@ -103,12 +101,23 @@ const Profile = ({label}) => {
             console.log(e);
         }
         console.log(data);
+    }
+
+    const profileData = async () => { //retrieving profile data from backend which is retrieved from database
+        const response = await fetch('/profiledata');
+        const jsonData = await response.json();
+
+        return jsonData;
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        updateFields(); //set variables for visual rendering on page load
     })
 
     const handleSubmit = async(e) => { //sending data to backend
         e.preventDefault();
         setPayment(document.getElementById('payment').value); //was state before
-        const profileData = {name, phoneNum, email, billaddress, diner, payment};
+        const profileData = {name, phoneNum, email, mailaddress, billaddress, diner, payment};
         
         const options = {
             method: 'POST',
@@ -143,7 +152,7 @@ const Profile = ({label}) => {
                         onChange = {(e) => setName(e.target.value)}
                         onKeyPress = {(e) => requireChars(e)}
                         onSelect = {(e) => checkEmpty(e)}
-                        readOnly="readonly"
+                        disabled = {!canEdit}
                         />
                     </li>
                     <li className='guest-info'>
@@ -151,15 +160,16 @@ const Profile = ({label}) => {
                         <input className='inputbox' type='text' title='Please enter your phone number.' minLength="10" maxLength="10" required placeholder='Enter your phone number.'
                         value = {phoneNum}
                         onChange = {(e) => setPhoneNum(e.target.value)}
+                        disabled = {!canEdit}
                         />
                     </li>
                     <li className='guest-info'>
                         <label className="Label">E-mail:</label>
-                        <input className="inputbox" id="email" type="text" minLength="1" maxLength="100"  required placeholder="Enter your mailing address."
+                        <input className="inputbox" id="email" type="text" minLength="1" maxLength="100"  placeholder="Enter your e-mail address."
                         value = {email}
                         onChange = {(e) => setEmail(e.target.value)}
                         onSelect = {(e) => checkEmpty(e)}
-                        readOnly="readonly"
+                        disabled = {!canEdit}
                         />
                     </li>
                     <li className='guest-info'>
@@ -168,15 +178,15 @@ const Profile = ({label}) => {
                         value = {mailaddress}
                         onChange = {(e) => setMailAddress(e.target.value)}
                         onSelect = {(e) => checkEmpty(e)}
-                        readOnly="readonly"
+                        disabled = {!canEdit}
                         />
                     </li>
                     <li className='guest-info'>
                         <label className="Label">Billing Address:</label>
-                        <input className="inputbox" id="billaddress" type="text" maxLength="100" placeholder="Enter your billing address, if applicable."
+                        <input className="inputbox" id="billaddress" type="text" maxLength="100" title='Enter your billing address, if different than mailing address.' placeholder="Enter billing address."
                         value = {billaddress}
                         onChange = {(e) => setBillAddress(e.target.value)}
-                        readOnly="readonly"
+                        disabled = {!canEdit}
                         />
                     </li>
                     <li className='guest-info'>
@@ -186,12 +196,12 @@ const Profile = ({label}) => {
                         onChange = {(e) => setDiner(e.target.value)}
                         onKeyPress = {(e) => requireNums(e)}
                         onSelect = {(e) => checkEmpty(e)}
-                        readOnly="readonly"
+                        disabled = {!canEdit}
                         />
                     </li>
                     <li className='guest-info'>
                         <label className="Label">Payment:</label>
-                        <select className="inputbox" id="payment" name="state" defaultValue={""} value={payment} onChange = {(e) => setPayment(e.target.value)} disabled={true}>
+                        <select className="inputbox" id="payment" name="state" defaultValue={""} value={payment} onChange = {(e) => setPayment(e.target.value)} required disabled = {!canEdit}>
                             <option value="">Select a payment method</option>
                             <option value="credit">Credit</option>    
                             <option value="cash">Cash</option>
@@ -200,13 +210,14 @@ const Profile = ({label}) => {
                     </li>
                 </ul>
                 <li>
-                    <div onClick={() => editFields()} id="edit">Edit Information</div>
+                    <div onClick={() => setEdit(true)} id="edit" hidden={canEdit}>Edit Information</div>
                 </li>
                 <li>
-                    <button data-testid="Submit"  className="Submit" id='save' type="submit" onClick={(e) => checkFields(e)}>Save{label}</button> 
+                    <button data-testid="Submit" className="Submit" id='save' type="submit" hidden={!canEdit} onClick={(e) => checkFields(e)}>Save{label}</button>
+                    <div className='container-option-button' style={{marginLeft: '1rem'}} hidden={!canEdit} onClick={() => { setEdit(false); updateFields(); }}>Cancel</div>
                 </li>
                 <li>
-                    <button data-testid="button" className="Submit" id='reserve'  type="button" onClick={() => { 
+                    <button data-testid="button" className="Submit" id='reserve'  type="button" hidden={canEdit} onClick={() => { 
                         navigate('/reserve');
                         document.location.reload('true'); 
                     }}>Reserve a Table</button>
