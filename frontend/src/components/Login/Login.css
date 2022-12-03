@@ -69,6 +69,20 @@ input {
     color: rgb(0, 105, 30);
 }
 
+.container-option-button {
+    background: none;
+    cursor: pointer;
+    font-size: 14pt;
+    font-weight: bold;
+    text-decoration: underline;
+    border: none;
+    color: rgb(0, 105, 135);
+}
+
+.container-option-button:hover {
+    color: rgb(0, 105, 30);
+}
+
 .Label {
     font-size: 20pt;
     color: #4C2600;

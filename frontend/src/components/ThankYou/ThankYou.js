@@ -15,7 +15,7 @@ const ThankYou = () => {
           Thank you for using Seat Yourself!
         </p>
         <p className='container-description'>
-          Click <a href='reserveinfo'>here</a> if you have an account and would like to view your reservation information, or click <a style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={() => navigate('/')}>here</a> to return to our home page.
+          Click <a href='reserveinfo'>here</a> if you have an account and would like to view your reservation information, or click<button className='container-option-button' onClick={() => navigate('/')}>here</button>to return to our home page.
         </p>
       </ul>
     </div>

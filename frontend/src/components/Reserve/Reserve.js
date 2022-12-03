@@ -26,7 +26,8 @@ const Reserve = () => {
 			data = await profileData();
 			console.log(data);
 			setName(data.name);
-			setEmail(data.email);
+			if(data.email !== "undefined")
+				setEmail(data.email);
 			if(data.phonenum !== "undefined")
 				setPhoneNum(data.phonenum);
 			//setCredit(credit);
@@ -55,18 +56,20 @@ const Reserve = () => {
 
 	
 
-	//console.log(datetime);
 	const specialDays = async(e) => {
 		setDateTime(e.target.value);
-		console.log(datetime);
+		console.log(`Datetime currently read: ${e.target.value}`);
+		console.log(`Current value being read as date: ${e.target.value.slice(0,10)}`);
 		//console.log(typeof(datetime));
-		var date = datetime.slice(0,10);
+		var date = e.target.value.slice(0,10);
 		console.log(date);
 		const finDate = new Date(date);
 		console.log(finDate.getDay());
 
-		if (finDate.getDay() === 6 || finDate.getDay() === 5) {//|| date.slice(5,11) == "06-04" || date.slice(5,11) == "12-25") {
+		if (finDate.getDay() === 6 || finDate.getDay() === 5 || date.slice(5,11) === "07-04" || date.slice(5,11) === "12-25") {
 			setHighTraffic(true);
+		} else {
+			setHighTraffic(false);
 		}
 	}
 
@@ -97,6 +100,21 @@ const Reserve = () => {
 		}
 	}
 
+	function requireChars(e) { // prevents numbers from being typed
+		console.log(e.key);
+		console.log(e.target.value[0]);
+		console.log(e.target.value.length);
+		console.log(e.target.value);
+		if((e.target.value[0] === ' ' || e.target.value[0] === undefined) && e.key === ' '){
+				e.preventDefault();
+		}
+
+		if ((e.key.length === 1 && !isNaN(e.key) && !e.ctrlKey && e.key !== ' ') || e.key === '.') {
+				e.preventDefault();
+				console.log('Please enter a character that is not a number/special character!');
+		}
+	}
+
 	function requireNums(e){ // prevents characters from being typed
 		if (e.key.length === 1 && isNaN(e.key) && !e.ctrlKey || e.key === '.' && e.target.value.toString().indexOf('.') > -1) {
 				e.preventDefault();
@@ -121,6 +139,7 @@ const Reserve = () => {
 								<label className='Label'>Name:</label>
 								<input className='inputbox' type='text' title='Please enter your name.' minLength="2" maxLength="50" required placeholder='Enter your name.'
 								onChange = {(e) => setName(e.target.value)}
+								onKeyPress = {(e) => requireChars(e)}
 								value = {name}
 								/>
 							</li>
@@ -183,6 +202,7 @@ const Reserve = () => {
 										<label className='Label'>Name on Card:</label>
 										<input className='inputbox' type='text' title='Please enter the name on the card exactly as it appears.' required placeholder='Enter name on card.'
 											disabled={!hightraffic}
+											onKeyPress = {(e) => requireChars(e)}
 											onChange = {(e) => setCardInfo({name: e.target.value, type: cardInfo['type'], number: cardInfo['number'], security: cardInfo['security'], expirationMonth: cardInfo['expirationMonth'], expirationYear: cardInfo['expirationYear']})}
 											value = {cardInfo['name']}
 										/>
@@ -264,7 +284,7 @@ const Reserve = () => {
 				</ul>
 				<ul className={alreadyReserved ? 'information-boxes' : 'hide'}>
 					<label className='container-title2'>YOU ALREADY HAVE A RESERVATION</label>
-					<p className='container-description'>You view your reservation information <a href='reserveinfo'>here</a> and/or cancel your current reservation, or click <a style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={() => navigate('/')}>here</a> to return to our home page.</p>
+					<p className='container-description'>You can view and/or cancel your current reservation <a href='reserveinfo'>here</a>, or click <button className='container-option-button' onClick={() => navigate('/')}>here</button> to return to our home page.</p>
 				</ul>
 			</form>
 		</div>
