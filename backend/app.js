@@ -19,6 +19,47 @@ function express_app(db) {  // export as function so that it can receive any spe
 
     //the above setup by Eric
 
+    // var num_tables_available = {'of_8': 2, 'of_6': 4, 'of_4': 8, 'of_2': 4};
+
+    // function reserveTables(num_guests){
+    //     while(num_guests > 0) {
+    //         switch(num_guests){
+    //             case num_guests >= 7:
+    //                 if(num_tables_available['of_8'] >= 1) {
+    //                     num_guests = num_guests - 8;
+    //                     num_tables_available['of_8'] = num_tables_available['of_8'] - 1;
+    //                 }
+    //             case num_guests >= 5:
+    //                 if(num_tables_available['of_6'] >= 1) {
+    //                     num_guests = num_guests - 6;
+    //                     num_tables_available['of_6'] = num_tables_available['of_6'] - 1;
+    //                 }
+    //             case num_guests >= 3:
+    //                 if(num_tables_available['of_4'] >= 1) {
+    //                     num_guests = num_guests - 4;
+    //                     num_tables_available['of_4'] = num_tables_available['of_4'] - 1;
+    //                 }
+    //             case num_guests > 0:
+    //                 if(num_tables_available['of_2'] >= 1) {
+    //                     num_guests = num_guests - 2;
+    //                     num_tables_available['of_2'] = num_tables_available['of_2'] - 1;
+    //                 }
+    //         }
+    //     }
+    // }
+
+    // app.get('/reservetable', function(request, response) {
+    //     let num_guests = request.body.guests;
+
+    //     if(!reserveTables(num_guests)) {
+    //         console.log('We do not have any more tables left to reserve.');
+    //         response.status(409).send({
+    //             status: 'We do not have any more tables left to reserve.'
+    //         });
+    //     }
+    // });
+
+
     app.get('/', function(request, response) {
         response.status(200).send('Home page successfully loaded.');
     });
@@ -54,10 +95,10 @@ function express_app(db) {  // export as function so that it can receive any spe
             response.status(201); // not working properly for unit test
             console.log(`Attempting to register user ${username}...`);
             let registerStatus = db.registerUser(username, password, email, phoneNum, request, response);
-            // response.status(201).send({
-            //     status: 'Registered user. (FROM BACKEND)',
-            //     registerStatus
-            // });
+            response.status(201).send({
+                status: 'Registered user. (FROM BACKEND)',
+                registerStatus
+            });
         } else {
             response.status(400).send({
                 status: 'Please enter username and password! (FROM BACKEND)'
@@ -138,7 +179,7 @@ function express_app(db) {  // export as function so that it can receive any spe
 
         // Ensure the input fields exists and are not empty
 	    if (username && password) {
-            response.status(201); // not working properly for unit test
+            //response.status(201).send(); // this is necessary to be uncommented ONLY for testing purposes, will cause issues otherwise
             console.log("Successfully obtained username and password");
 		    db.authUser(username, password, request, response);
         } else {

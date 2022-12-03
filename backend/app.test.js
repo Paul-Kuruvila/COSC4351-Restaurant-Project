@@ -70,7 +70,7 @@ describe("Unit Tests", () => {
         expect(registerUser.mock.calls[0][2]).toBe('t@fakemail.com');
         expect(registerUser.mock.calls[0][3]).toBe('1234567890');
         expect(res.status).toEqual(201);
-        //expect(res.body.status).toEqual('Registered user. (FROM BACKEND)');
+        expect(res.body.status).toEqual('Registered user. (FROM BACKEND)');
     })
 
     it('POST /auth should fail to login if username or password is not entered', async () => {
