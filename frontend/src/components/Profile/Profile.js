@@ -1,5 +1,5 @@
 import './Profile.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useNavigate} from "react-router-dom";
 
 //html/validation/etc. handled by Paul; http requests handled by Eric ; button handler for testing by David
@@ -117,7 +117,11 @@ const Profile = ({label}) => {
     const handleSubmit = async(e) => { //sending data to backend
         e.preventDefault();
         setPayment(document.getElementById('payment').value); //was state before
-        const profileData = {name, phoneNum, email, mailaddress, billaddress, diner, payment};
+        let email_value, mailaddress_value, billaddress_value;
+        if(email === '')  email_value = undefined;
+        if(mailaddress === '')  mailaddress_value = undefined;
+        if(billaddress === '')  billaddress_value = undefined;
+        const profileData = {name, phoneNum, email_value, mailaddress_value, billaddress_value, diner, payment};
         
         const options = {
             method: 'POST',
