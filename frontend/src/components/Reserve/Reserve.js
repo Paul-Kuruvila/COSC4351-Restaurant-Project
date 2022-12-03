@@ -58,13 +58,8 @@ const Reserve = () => {
 
 	const specialDays = async(e) => {
 		setDateTime(e.target.value);
-		console.log(`Datetime currently read: ${e.target.value}`);
-		console.log(`Current value being read as date: ${e.target.value.slice(0,10)}`);
-		//console.log(typeof(datetime));
 		var date = e.target.value.slice(0,10);
-		console.log(date);
 		const finDate = new Date(date);
-		console.log(finDate.getDay());
 
 		if (finDate.getDay() === 6 || finDate.getDay() === 5 || date.slice(5,11) === "07-04" || date.slice(5,11) === "12-25") {
 			setHighTraffic(true);
@@ -79,7 +74,6 @@ const Reserve = () => {
 		const options = {
 			method: 'POST',
 			headers: {"Content-Type": "application/json"},
-			//credentials: "include",
 			body: JSON.stringify(guestData)
 		};
 
@@ -101,10 +95,6 @@ const Reserve = () => {
 	}
 
 	function requireChars(e) { // prevents numbers from being typed
-		console.log(e.key);
-		console.log(e.target.value[0]);
-		console.log(e.target.value.length);
-		console.log(e.target.value);
 		if((e.target.value[0] === ' ' || e.target.value[0] === undefined) && e.key === ' '){
 				e.preventDefault();
 		}
