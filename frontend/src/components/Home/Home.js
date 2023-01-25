@@ -1,6 +1,6 @@
 import './Home.css';
 import React, { useState, useRef, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const backgroundColors = ['#FFB399', '#FFFF99','#E6B333', '#999966', '#99FF99',
 '#E6B3B3', '#B366CC', '#80B300', '#1AB399', '#809900', '#66664D', '#CC80CC']; 
